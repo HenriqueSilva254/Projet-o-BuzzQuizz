@@ -9,29 +9,77 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <title>BuzzQuizz</title>
 </head>
 <body>
     <header>
         <div class="navbar content">BuzzQuizz</div>
     </header>
     <main class="container">
-        <div class="content">
-            <div class="inserirQuizz"></div>
-        </div>
-        <ul>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-        </ul>
+        <div class="mostrarQuizzes escondido">
+            <div class="content">
+                <div class="inserirQuizz"></div>
+            </div>
+            <ul>
+                <li class="Quizz"></li>
+                <li class="Quizz"></li>
+                <li class="Quizz"></li>
+            </ul>
         
-        <ul>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-        </ul>
-      
-    </main>
+            <ul>
+                <li class="Quizz"></li>
+                <li class="Quizz"></li>
+                <li class="Quizz"></li>
+            </ul>
+        </div>   
+    </main>   
+    <div class="criarQuizz">
+        <div>
+            <p class="informacoes">Comece pelo começo</p>
+        </div>
+        <div class="informacoes">
+            
+            <input type="text" class="titulo" placeholder="Título do seu quizz">
+            <input type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz">
+            <input type="text" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz">
+            <input type="text" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
+        </div>
+        <button onclick="criarPerguntas()">Prosseguir para criar perguntas</button>
+    </div>
+    <div class="criarPerguntas">
+        <div>
+            <p class="informacoes">Crie suas perguntas</p>
+        </div>
+        <div class="pergunta1">
+            <div class="info1">
+                <span>Pergunta 1</span>
+                <input type="text" class="text-pergunta1" placeholder="Texto da pergunta">
+                <input type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
+            </div>
+            <div class="correta1">
+                <span>Resposta correta</span>
+                <input type="text" class="correta-pergunta1" placeholder="Resposta correta">
+                <input type="text" class="url-certa-pergunta1" placeholder="URL da imagem">
+            </div>
+            <div class="incorretas1">
+                <span class="">Respostas incorretas</span>
+                <div class="incorreta1">
+                    <input type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
+                    <input type="text" class="text-pergunta1" placeholder="URL da imagem 1">
+                </div>
+                <div class="incorreta2">
+                    <input type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
+                    <input type="text" class="text-pergunta1" placeholder="URL da imagem 2">
+                </div>
+                <div class="incorreta3">
+                    <input type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
+                    <input type="text" class="text-pergunta1" placeholder="URL da imagem 3">
+                </div>
+            </div>
+        </div>
+        <button>Prosseguir para criar níveis</button>
+    </div>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="./script/script.js"></script>
 </body>
 </html>
