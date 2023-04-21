@@ -40,26 +40,30 @@ function criarPerguntas() {
     const urlImg = document.getElementById('url-img').value
     const qntdPerguntas = document.getElementById('qntd-perguntas').value
     const qntdNiveis = document.getElementById('qntd-nvl').value
+    const inputs = [titulo, urlImg, qntdPerguntas, qntdNiveis]
 
     if(qntdPerguntas > 3 && qntdNiveis > 2 && titulo.length > 20 && titulo.length < 65 ){
         criarQuizz.classList.add('escondido')
         criarPerguntas.classList.remove('escondido')
+        getValueImputs(inputs)
     }
 
-    const inputs = [titulo, urlImg, qntdPerguntas, qntdNiveis]
     
-    console.log(inputs)
+    
+    
     // getValueImputs(inputs)
 }
 
+/*
 
 // pegar valores dos imputs
-/*
+
 function getValueImputs(put){
 criarQuizz.title = put[0]
 criarQuizz.image = put[1]
 
-MakeArrayPerguntas(Number(put[2]))
+MakeArrayPerguntas(put[2])
+console.log(put)
 }
 
 // calcular numero de perguntas 
@@ -73,7 +77,9 @@ function MakeArrayPerguntas(put){
        //console.log("boa")
     }
     console.log(criarQuizz)
+    console.log(put)
 }
+
 */
 
 
