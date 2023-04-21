@@ -50,8 +50,9 @@
         <div>
             <p class="informacoes">Crie suas perguntas</p>
         </div>
-        <div class="pergunta1">
-            <div class="info1">
+        <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
+        <div class="pergunta">
+            <div class="info">
                 <span>Pergunta 1</span>
                 <input type="text" class="text-pergunta1" placeholder="Texto da pergunta">
                 <input type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
@@ -65,19 +66,35 @@
                 <span class="">Respostas incorretas</span>
                 <div class="incorreta1">
                     <input type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
-                    <input type="text" class="text-pergunta1" placeholder="URL da imagem 1">
+                    <input type="text" class="incorreta2-pergunta1" placeholder="URL da imagem 1">
                 </div>
                 <div class="incorreta2">
                     <input type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
-                    <input type="text" class="text-pergunta1" placeholder="URL da imagem 2">
+                    <input type="text" class="incorreta2-pergunta1" placeholder="URL da imagem 2">
                 </div>
                 <div class="incorreta3">
                     <input type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
-                    <input type="text" class="text-pergunta1" placeholder="URL da imagem 3">
+                    <input type="text" class="incorreta3-pergunta1" placeholder="URL da imagem 3">
                 </div>
             </div>
+        </div> 
+        <div class="criarPerguntas outrasPerguntas">
+
         </div>
-        <button>Prosseguir para criar níveis</button>
+        <button onclick="decidirNiveis()">Prosseguir para criar níveis</button>
+    </div>
+    <div class="decidirNiveis escondido">
+        <div>
+            <p class="informacoes">Agora, decida os níveis</p>
+        </div>
+        <div class="informacoes">
+            <p>nivel 1</p>
+            <input type="text" class="titulo-nivel1" placeholder="Título do nível">
+            <input type="text" class="imagem-capa-nivel1" placeholder="% de acerto mínima">
+            <input type="text" class="qtde-perguntas-nivel1" placeholder="URL da imagem do nível">
+            <input type="text" class="qtde-niveis" placeholder="Descrição do nível">
+        </div>
+        <button onclick="criar()">Finalizar Quizz</button>
     </div>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="./script/script.js"></script>
