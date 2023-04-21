@@ -41,8 +41,8 @@
             
             <input data-test="title-input" id="title" minlength="20" maxlength="65" type="text" class="titulo" placeholder="Título do seu quizz" value="dddddddddddddddddddddd">
             <input data-test="img-input" id="url-img" type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz" value="https://hub.driven.com.br/tempo-de-codigo">
-            <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantdata-test="" idade de perguntas do quizz">
-            <input data-test="levels-amouts-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
+            <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz" value ="5">
+            <input data-test="levels-amouts-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz" value ="5">
         </div>
         <button data-test="go-creat-questions" onclick="checkUrl(document.querySelector('.imagem-capa').value)">Prosseguir para criar perguntas</button>
     </div>
@@ -53,31 +53,31 @@
         <div data-test="question-ctn" class="pergunta1">
             <div class="info1">
                 <span>Pergunta 1</span>
-                <input data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
-                <input data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
+                <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
+                <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
             </div>
             <div class="correta1">
                 <span>Resposta correta</span>
-                <input data-test="correct-answer-input" type="text" class="correta-pergunta1" placeholder="Resposta correta">
-                <input data-test="correct-img-input" type="text" class="url-certa-pergunta1" placeholder="URL da imagem">
+                <input id="" data-test="correct-answer-input" type="text" class="correta-pergunta1" placeholder="Resposta correta">
+                <input id="" data-test="correct-img-input" type="text" class="url-certa-pergunta1" placeholder="URL da imagem">
             </div>
             <div class="incorretas1">
                 <span class="">Respostas incorretas</span>
                 <div class="incorreta1">
-                    <input data-test="wrong-answer-input" type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
-                    <input data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 1">
+                    <input id="" data-test="wrong-answer-input" type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
+                    <input id="" data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 1">
                 </div>
                 <div class="incorreta2">
-                    <input data-test="wrong-answer-input" type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
-                    <input data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 2">
+                    <input id="" data-test="wrong-answer-input" type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
+                    <input id="" data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 2">
                 </div>
                 <div class="incorreta3">
-                    <input data-test="wrong-answer-input" type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
-                    <input data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 3">
+                    <input id="" data-test="wrong-answer-input" type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
+                    <input id="" data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 3">
                 </div>
             </div>
         </div>
-        <button data-test="go-creat-levels" >Prosseguir para criar níveis</button>
+        <button data-test="go-creat-levels" onclick="GetValuePerguntas()">Prosseguir para criar níveis</button>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
