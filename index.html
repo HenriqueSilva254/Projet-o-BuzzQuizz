@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,33 +8,33 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <title>BuzzQuizz</title>
 </head>
+
 <body>
-    <header>
-        <div class="navbar content">BuzzQuizz</div>
-    </header>
-    <main class="container">
-        <div class="mostrarQuizzes escondido">
+    <div class="pagina1">
+        <header>
+            <div class="navbar content">BuzzQuizz</div>
+        </header>
+        <main class="container">
             <div class="content">
-                <div class="inserirQuizz"></div>
+                <div class="inserirQuizz">
+                    <div class="nenhumquizz">Você não criou nenhum quizz ainda:( </div>
+                    <div class="criarquizz">Criar Quizz</div>
+                </div>
             </div>
-            <ul>
-                <li class="Quizz"></li>
-                <li class="Quizz"></li>
-                <li class="Quizz"></li>
-            </ul>
-        
-            <ul>
-                <li class="Quizz"></li>
-                <li class="Quizz"></li>
+            <p class="titulo">Todos os Quizzes</p>
+            <ul class="todosQuizzes">
                 <li class="Quizz"></li>
             </ul>
-        </div>   
-    </main>   
-    <div class="criarQuizz">
+        </main>
+    </div>
+    
+    <div class="criarQuizz escondido">
         <div>
             <p class="informacoes">Comece pelo começo</p>
         </div>
@@ -52,6 +53,9 @@
         </div>
         <div data-test="question-ctn" class="pergunta1">
             <div class="info1">
+        <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
+        <div class="pergunta">
+            <div class="info">
                 <span>Pergunta 1</span>
                 <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
                 <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
@@ -74,13 +78,44 @@
                 <div class="incorreta3">
                     <input id="" data-test="wrong-answer-input" type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
                     <input id="" data-test="wrong-img-input" type="text" class="text-pergunta1" placeholder="URL da imagem 3">
+                    <input type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
+                    <input type="text" class="incorreta2-pergunta1" placeholder="URL da imagem 1">
+                </div>
+                <div class="incorreta2">
+                    <input type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
+                    <input type="text" class="incorreta2-pergunta1" placeholder="URL da imagem 2">
+                </div>
+                <div class="incorreta3">
+                    <input type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
+                    <input type="text" class="incorreta3-pergunta1" placeholder="URL da imagem 3">
                 </div>
             </div>
+        </div> 
+        <div class="criarPerguntas outrasPerguntas">
+
         </div>
         <button data-test="go-creat-levels" onclick="GetValuePerguntas()">Prosseguir para criar níveis</button>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+        <button onclick="decidirNiveis()">Prosseguir para criar níveis</button>
+    </div>
+    <div class="decidirNiveis escondido">
+        <div>
+            <p class="informacoes">Agora, decida os níveis</p>
+        </div>
+        <div class="informacoes">
+            <p>nivel 1</p>
+            <input type="text" class="titulo-nivel1" placeholder="Título do nível">
+            <input type="text" class="imagem-capa-nivel1" placeholder="% de acerto mínima">
+            <input type="text" class="qtde-perguntas-nivel1" placeholder="URL da imagem do nível">
+            <input type="text" class="qtde-niveis" placeholder="Descrição do nível">
+        </div>
+        <button onclick="criar()">Finalizar Quizz</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script src="./script/script.js"></script>
 </body>
+
 </html>
