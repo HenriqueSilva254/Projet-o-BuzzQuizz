@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,31 +8,35 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <header>
-        <div class="navbar content">BuzzQuizz</div>
-    </header>
-    <main class="container">
-        <div class="content">
-            <div class="inserirQuizz"></div>
-        </div>
-        <ul>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-        </ul>
-        
-        <ul>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-            <li class="Quizz"></li>
-        </ul>
-      
-    </main>
-<script src="./script/script.js"></script>
+    <div class="pagina1">
+        <header>
+            <div class="navbar content">BuzzQuizz</div>
+        </header>
+        <main class="container">
+            <div class="content">
+                <div class="inserirQuizz">
+                    <div class="nenhumquizz">Você não criou nenhum quizz ainda :(</div>
+                    <div class="criarquizz">Criar Quizz</div>
+                </div>
+            </div>
+            <p class="titulo">Todos os Quizzes</p>
+            <ul class="todosQuizzes">
+                <li class="Quizz"></li>
+            </ul>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src="./script/script.js"></script>
 </body>
+
 </html>
