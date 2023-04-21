@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,33 +8,33 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
     <title>BuzzQuizz</title>
 </head>
+
 <body>
-    <header>
-        <div class="navbar content">BuzzQuizz</div>
-    </header>
-    <main class="container">
-        <div class="mostrarQuizzes escondido">
+    <div class="pagina1">
+        <header>
+            <div class="navbar content">BuzzQuizz</div>
+        </header>
+        <main class="container">
             <div class="content">
-                <div class="inserirQuizz"></div>
+                <div class="inserirQuizz">
+                    <div class="nenhumquizz">Você não criou nenhum quizz ainda :(</div>
+                    <div class="criarquizz">Criar Quizz</div>
+                </div>
             </div>
-            <ul>
-                <li class="Quizz"></li>
-                <li class="Quizz"></li>
-                <li class="Quizz"></li>
-            </ul>
-        
-            <ul>
-                <li class="Quizz"></li>
-                <li class="Quizz"></li>
+            <p class="titulo">Todos os Quizzes</p>
+            <ul class="todosQuizzes">
                 <li class="Quizz"></li>
             </ul>
-        </div>   
-    </main>   
-    <div class="criarQuizz">
+        </main>
+    </div>
+    
+    <div class="criarQuizz escondido">
         <div>
             <p class="informacoes">Comece pelo começo</p>
         </div>
@@ -96,7 +97,9 @@
         </div>
         <button onclick="criar()">Finalizar Quizz</button>
     </div>
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script src="./script/script.js"></script>
 </body>
+
 </html>
