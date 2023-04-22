@@ -336,7 +336,8 @@ ul {
 .decidirNiveis p {
     inline-size: 600px;
     width: 100%;
-    text-align: center;
+    text-align: start;
+    padding-left: 20px;
     margin-top: 130px;
     margin-bottom: 27px;
     background: #FAFAFA;
@@ -348,7 +349,9 @@ ul {
     line-height: 27px;
     color: #000000;
 }
-
+.decidirNiveis p {
+    margin-top: 0;
+}
 .informacoes,
 .pergunta, .nivel {
     background: #FFFFFF;
