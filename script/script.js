@@ -30,7 +30,7 @@ function renderizarPerguntas() {
 
     template += `
         <div class="quizz">
-          <div class="fotoquizz">
+          <div class="fotoquizz" data-test="banner">
             <img class="capa" src="${quizz.image}" />
           </div>
           <p class="titulocentral">${quizz.title}</p>
@@ -40,8 +40,8 @@ function renderizarPerguntas() {
     for (let j = 0; j < quizz.questions.length; j++) {
         // Adicione um atributo de estilo para o elemento do título da pergunta
         template += `
-          <div class="pergunta">
-            <p class="enunciado" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
+          <div class="pergunta" data-test="question" >
+            <p class="enunciado" data-test="question-title" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
             <div class="fotosperguntas">
         `;
 
@@ -54,11 +54,11 @@ function renderizarPerguntas() {
 
         for (let k = 0; k < respostas.length && k < 4; k++) {
             template += `
-            <div class="fotoenome">
+            <div class="fotoenome" data-test="answer">
               <div class="imagem">
                 <img class="imagem1" onclick="selecionarRespostas(this)" src="${respostas[k].image}" />
               </div>
-              <p class="resposta">${respostas[k].text}</p>
+              <p class="resposta" data-test="answer-text">${respostas[k].text}</p>
             </div>
           `;
         }
@@ -110,10 +110,9 @@ function renderizarQuizzes() {
     let template;
 
     for (let i = 0; i < quizzes.length; i++) {
-        let
-
-            template = `
-        <li class="Quizz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
+        
+        template = `
+        <li class="Quizz" data-test="others-quiz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
         <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
         <p class = "titulo1">${quizzes[i].title}</p>
         </li>
@@ -357,9 +356,9 @@ function numerodePerguntas () {
     const numero = Number(document.querySelector('.qtde-perguntas').value)
     for (let i = 1; i < numero; i++) {
 
-        perguntas.innerHTML += `<div class="perguntamini">
+        perguntas.innerHTML += `<div class="perguntamini" data-test="question-ctn">
         <span>Pergunta ${i+1}</span>
-        <img src="imgs/note.png" onclick="abrirPergunta(this, ${i +1})">
+        <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, ${i +1})">
     </div>`     
     }
     }
@@ -386,7 +385,7 @@ function abrirPergunta(pergunta, i) {
     Pergunta.classList.remove('perguntamini')
 
     Pergunta.innerHTML = `<div class='pergunta'>
-<div class='info'>
+<div data-test="question-ctn" class='info'>
     <span>Pergunta ${i}</span> 
     <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
     <input data-test="question-color-input" type='text' class='cor-pergunta${i}' placeholder='Cor de fundo da pergunta'>
@@ -431,7 +430,7 @@ function numerodeNiveis () {
 
     for (let i = 1; i < qntdNiveis; i++) {
 
-        niveis.innerHTML += `<div class="nivelmini">
+        niveis.innerHTML += `<div class="nivelmini" data-test="toggle">
         <span>nível ${i+1}</span>
         <img src="imgs/note.png" onclick="abrirnivel(this, ${i +1})">
     </div>`     
@@ -443,12 +442,12 @@ function abrirnivel (nivel, i) {
     Nivel.classList.add('nivel')
     Nivel.classList.remove('nivelmini')
 
-    Nivel.innerHTML = `<div class="informacoes">
+    Nivel.innerHTML = `<div class="informacoes" data-test="level-ctn">
     <p>nível ${i}</p>
-    <input type="text" class="titulo-nivel${i}" placeholder="Título do nível">
-    <input type="text" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
-    <input type="text" class="url-nivel${i}" placeholder="URL da imagem do nível">
-    <input type="text" class="descricao-nivel${i}" placeholder="Descrição do nível">
+    <input type="text" data-test="level-input" class="titulo-nivel${i}" placeholder="Título do nível">
+    <input type="text" data-test="level-percent-input" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
+    <input type="text" data-test="level-img-input" class="url-nivel${i}" placeholder="URL da imagem do nível">
+    <input type="textarea" data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível">
 </div>`
 
 }
