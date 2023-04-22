@@ -119,6 +119,9 @@ body {
     align-items: center;
     box-sizing: border-box;
 }
+.criarquizz:hover {
+    cursor: pointer;
+}
 
 ul {
     width: 1055px;
@@ -347,7 +350,7 @@ ul {
 }
 
 .informacoes,
-.pergunta {
+.pergunta, .nivel {
     background: #FFFFFF;
     text-align: center;
     display: flex;
@@ -361,7 +364,7 @@ ul {
     margin: 15px auto;
 }
 
-.perguntamini {
+.perguntamini, .nivelmini {
     padding: 20px;
     margin: 15px 10px;
     background: #FFFFFF;
@@ -444,7 +447,7 @@ button:hover,
 
 /* criar perguntas */
 
-.criarPerguntas span {
+.criarPerguntas span, .decidirNiveis span {
     inline-size: 600px;
     text-align: start;
     /* margin-top: 130px; */

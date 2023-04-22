@@ -143,7 +143,15 @@ function buscarTodosOsQuizzes() {
 buscarTodosOsQuizzes();
 let contador = 8;
 let Pergunta = '';
+let Nivel = ''
 
+function criarQuizz() {
+    const index = document.querySelector('.pagina1');
+    const criarQuizz = document.querySelector('.criarQuizz');
+
+    index.classList.add('escondido');
+    criarQuizz.classList.remove('escondido');
+}
 
 function numerodePerguntas () {
     const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
@@ -205,6 +213,7 @@ function abrirPergunta(pergunta, i) {
     </div>
 </div> 
 </div>`;
+console.log(Pergunta)
 }
 
 
@@ -214,4 +223,43 @@ function decidirNiveis() {
 
     criarPerguntas.classList.add('escondido');
     decidirNiveis.classList.remove('escondido');
+    numerodeNiveis();
+}
+
+function numerodeNiveis () {
+    const niveis = document.querySelector('.decidirNiveis .outrosNiveis')
+
+    for (let i = 1; i < contador; i++) {
+
+        niveis.innerHTML += `<div class="nivelmini">
+        <span>nível ${i+1}</span>
+        <img src="imgs/note.png" onclick="abrirnivel(this, ${i +1})">
+    </div>`     
+    }
+}
+function abrirnivel (nivel, i) {
+    Nivel = nivel.parentNode;
+    //const numero = Pergu
+    Nivel.classList.add('nivel')
+    Nivel.classList.remove('nivelmini')
+
+    Nivel.innerHTML = `<div class="informacoes">
+    <span>nível ${i}</span>
+    <input type="text" class="titulo-nivel${i}" placeholder="Título do nível">
+    <input type="text" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
+    <input type="text" class="url-nivel${i}" placeholder="URL da imagem do nível">
+    <input type="text" class="descricao-nivel${i}" placeholder="Descrição do nível">
+</div>`
+
+}
+
+
+function criarPerguntas() {
+    const criarQuizz = document.querySelector('.criarQuizz');
+    const criarPerguntas = document.querySelector('.criarPerguntas');
+
+    criarQuizz.classList.add('escondido');
+    criarPerguntas.classList.remove('escondido');
+
+    numerodePerguntas();
 }
