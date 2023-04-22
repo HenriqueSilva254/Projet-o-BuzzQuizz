@@ -20,10 +20,10 @@
         <header>
             <div class="navbar content">BuzzQuizz</div>
         </header>
-        <main class="container">
+        <main class="container escondido">
             <div class="content">
                 <div class="inserirQuizz">
-                    <div class="nenhumquizz">Você não criou nenhum quizz ainda:( </div>
+                    <div class="nenhumquizz">Você não criou nenhum quizz ainda :( </div>
                     <div class="criarquizz">Criar Quizz</div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         </main>
     </div>
     
-    <div class="criarQuizz escondido">
+    <div class="criarQuizz">
         <div>
             <p class="informacoes">Comece pelo começo</p>
         </div>
@@ -42,10 +42,10 @@
             
             <input data-test="title-input" id="title" minlength="20" maxlength="65" type="text" class="titulo" placeholder="Título do seu quizz" value="dddddddddddddddddddddd">
             <input data-test="img-input" id="url-img" type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz" value="https://hub.driven.com.br/tempo-de-codigo">
-            <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz" value ="5">
-            <input data-test="levels-amouts-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz" value ="5">
+            <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz" value ="3">
+            <input data-test="levels-amouts-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz" value ="3">
         </div>
-        <button data-test="go-creat-questions" onclick="checkUrl(document.querySelector('.imagem-capa').value)">Prosseguir para criar perguntas</button>
+        <button data-test="go-creat-questions" onclick="numerodePerguntas(), checkUrl(document.querySelector('.imagem-capa').value)">Prosseguir para criar perguntas</button>
     </div>
     <div class="criarPerguntas escondido">
         <div>
@@ -92,13 +92,9 @@
             </div>
         </div> 
         <div class="criarPerguntas outrasPerguntas">
-
-        </div>
-        <button data-test="go-creat-levels" onclick="GetValuePerguntas()">Prosseguir para criar níveis</button>
-    </div>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-        <button onclick="decidirNiveis()">Prosseguir para criar níveis</button>
+        </div>    
+        <button onclick="GetValuePerguntas()">Prosseguir para criar níveis</button>
+        <!-- decidirNiveis() -->
     </div>
     <div class="decidirNiveis escondido">
         <div>
@@ -113,8 +109,8 @@
         </div>
         <button onclick="criar()">Finalizar Quizz</button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="./script/script.js"></script>
 </body>
 

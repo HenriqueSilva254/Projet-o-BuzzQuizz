@@ -142,24 +142,36 @@ function buscarTodosOsQuizzes() {
 }
 
 buscarTodosOsQuizzes();
-let contador = 8;
-let Pergunta = '';
 
 
-function numerodePerguntas () {
-    const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
 
-    for (let i = 1; i < contador; i++) {
 
-        perguntas.innerHTML += `<div class="perguntamini">
-        <span>Pergunta ${i+1}</span>
-        <img src="imgs/note.png" onclick="abrirPergunta(this, ${i +1})">
-    </div>`     
-    }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+// fim da parte da NAT... INICIO PARTE DO HENRIQUE ... 
+
+
+
+
+
+
+
+
+
 
 // console.log(document.getElementById(title).value)
-const criarQuizz = []
+
+const criarQuizz = {}
 const qntdPerguntas = document.getElementById('qntd-perguntas').value
 const qntdNiveis = document.getElementById('qntd-nvl').value
 
@@ -242,7 +254,7 @@ function MakeArrayPerguntas(put){
     }
     
     criarQuizz.questions[2].answers.length = 4 
-
+    console.log(criarQuizz)
     let c = 0
     for(i=0;i<put;i++){
         if(c < 4){
@@ -252,38 +264,71 @@ function MakeArrayPerguntas(put){
     }
     c++
     }
+    console.log(criarQuizz)
 }
 
 // pegar valores dos inputs das PERGUNTAS 
 
 function GetValuePerguntas(){
+   
+    //const txtPergunta = []
+    //const corPergunta = []
+    let c = 0
+    for(i=0; i <Number(qntdPerguntas);i++){
+        
+        let texto = document.querySelector(`.text-pergunta${c+1}`).value
+        let cor = document.querySelector(`.cor-pergunta${c+1}`).value
+        
+        criarQuizz.questions[c].title = texto
+        criarQuizz.questions[c].color = cor
+        c++
+        console.log(criarQuizz.questions[c])
+        //txtPergunta.push(texto)
+        //corPergunta.push(cor)
+        // inputPerguntas(i, txtPergunta, corPergunta)
+    }
 
-    const txtPergunta = document.getElementById('txtPergunta').value
-    const corPergunta = document.getElementById('corPergunta').value
-    
+
+
+
+     /*
+
+    function inputPerguntas(i, txtPergunta, corPergunta){
+        criarQuizz.questions[i].title = txtPergunta[i]
+        criarQuizz.questions[i].color = corPergunta[i]
+        console.log( criarQuizz.questions[i].color[i][i])
+    }
+
+    let i = 0
+    let txtPergunta = document.querySelector(`.text-pergunta${i+1}`).value
+    let corPergunta = document.querySelector(`.cor-pergunta${i+1}`).value
+   
     for(i=0;i<Number(qntdPerguntas);i++){
         criarQuizz.questions[i].title = txtPergunta
         criarQuizz.questions[i].color = corPergunta
     }
 
+      
+        if( c <Number(qntdPerguntas)){
+            criarQuizz.questions[i].title = txtPergunta
+            criarQuizz.questions[i].color = corPergunta
+        }
+        c++
+   */ 
+
     console.log(criarQuizz)
 }
 
-/*
 
-{
-    text: "Texto da resposta 1",
-    image: "https://http.cat/411.jpg",
-    isCorrectAnswer: true
-},
-{
-    text: "Texto da resposta 2",
-    image: "https://http.cat/412.jpg",
-    isCorrectAnswer: false
-}
-]
 
-*/
+
+
+
+
+
+
+
+// FIM DA PARTE DO HENRIQUE .... INICIO DA PARTE DO LUIGI 
 
 
 
@@ -296,15 +341,20 @@ function GetValuePerguntas(){
 
 
 
+let Pergunta = '';
 
 
+function numerodePerguntas () {
+    const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
 
+    for (let i = 1; i < qntdPerguntas; i++) {
 
-
-
-const perguntasQuizz =[];
-const respostasQuizz =[];
-
+        perguntas.innerHTML += `<div class="perguntamini">
+        <span>Pergunta ${i+1}</span>
+        <img src="imgs/note.png" onclick="abrirPergunta(this, ${i +1})">
+    </div>`     
+    }
+    }
 
 
 
