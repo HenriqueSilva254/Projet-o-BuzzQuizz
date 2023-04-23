@@ -1,26 +1,126 @@
 let quizzes = [];
 let quizz;
+let contadorrespostascertas = 0;
+let contadortotalperguntas = 0;
+let quantidadedeperguntasquizz = 0;
+let PorcentagemdeAcertosemCadaQuizz = 0;
+let imagemLevel = '';
+let tituloLevel = '';
+let descricaoLevel = '';
+
 
 axios.defaults.headers.common['Authorization'] = 'D1tow2WsfGdVjgTVFdhmZiAi';
 
-function selecionarRespostas(elemento) {
-      // Verifica se a opção já foi selecionada
-  if (elemento.classList.contains('selecionada')) {
-    return;
-  }
+function ReiniciarOProprioQuizz() {
+    contadorrespostascertas = 0;
+    contadortotalperguntas = 0;
+    quantidadedeperguntasquizz = 0;
+    PorcentagemdeAcertosemCadaQuizz = 0;
+    imagemLevel = '';
+    tituloLevel = '';
+    descricaoLevel = '';
+    renderizarPerguntas()
+}
 
-  const opcoesElementos = elemento.parentElement.querySelectorAll('.descricao');
+function scrollrecarregar() {
+    window.scrollBy(0, -3000)
+}
 
-  // Percorre todas as opções e remove a classe 'selecionada'
-  opcoesElementos.forEach((opcaoElemento) => {
-    opcaoElemento.classList.remove('selecionada');
-  });
+function RecarregarPaginainicial() {
+    location.reload();
+    scrollrecarregar()
+}
 
-  // Adiciona a classe 'selecionada' apenas na opção clicada
-  elemento.classList.add('selecionada');
+function scroll() {
+    window.scrollBy(0, 720)
+}
+function selecionarRespostas(elemento, pai) {
+
+    setTimeout(scroll, 2000);
+    console.log(elemento);
+    console.log(pai);
+    elemento.classList.remove('imagem1');
+    elemento.classList.add('imagem2');
+
+    const esbranquicarresposta = elemento.closest('.fotoenome').querySelector('.resposta');
+    esbranquicarresposta.classList.add('resposta1');
+    esbranquicarresposta.classList.remove('resposta');
+
+    const imagens = pai.querySelectorAll('.imagem1');
+    imagens.forEach(elemento => {
+        elemento.classList.add('naoselecionada');
+    });
+
+    const respostas = pai.querySelectorAll('.resposta');
+
+    for (let i = 0; i < respostas.length; i++) {
+        respostas[i].classList.remove('display');
+        respostas[i].classList.add('naoselecionada');
+    }
+    const respostas2 = pai.querySelectorAll('.resposta1');
+
+    for (let i = 0; i < respostas2.length; i++) {
+        respostas2[i].classList.remove('display');
+    }
+
+    const respostas1 = pai.querySelectorAll('.respostaemcima');
+    console.log(respostas1)
+
+    for (let i = 0; i < respostas1.length; i++) {
+        respostas1[i].classList.add('display');
+    }
+
+    for (let i = 0; i < respostas2.length; i++) {
+        if (respostas2[i].classList.contains('true') === true && contadorrespostascertas <= quantidadedeperguntasquizz && respostas2[i].classList.contains('naoselecionada') === false) {
+            contadorrespostascertas++
+        }
+        console.log(contadorrespostascertas)
+    }
+    quantidadedeperguntasquizz = quizz.questions.length
+    PorcentagemdeAcertosemCadaQuizz = (contadorrespostascertas / quantidadedeperguntasquizz * 100);
+    console.log(PorcentagemdeAcertosemCadaQuizz)
+
+    if (elemento.classList.contains('naoselecionada') === false) {
+        contadortotalperguntas++
+    }
+
+    if (contadortotalperguntas === quantidadedeperguntasquizz) {
+        const aparecerNível = document.querySelector('.descobrirNivel')
+        aparecerNível.classList.remove('escondido')
+        const aparecerRecarregar = document.querySelector('.reiniciaroQUIZZ')
+        aparecerRecarregar.classList.remove('escondido')
+
+        for (let i = 0; i < quizz.levels.length - 1; i++) {
+            if (quizz.levels[i].minValue <= PorcentagemdeAcertosemCadaQuizz &&
+                PorcentagemdeAcertosemCadaQuizz < quizz.levels[i + 1].minValue) {
+                tituloLevel = quizz.levels[i].title;
+                console.log(tituloLevel)
+                imagemLevel = quizz.levels[i].image;
+                descricaoLevel = quizz.levels[i].text;
+                console.log(descricaoLevel)
+            } else if (quizz.levels[i].minValue <= PorcentagemdeAcertosemCadaQuizz &&
+                PorcentagemdeAcertosemCadaQuizz > quizz.levels[i + 1].minValue && quizz.levels[i + 1].minValue < quizz.levels[i].minValue) {
+                tituloLevel = quizz.levels[i].title;
+                console.log(tituloLevel)
+                imagemLevel = quizz.levels[i].image;
+                descricaoLevel = quizz.levels[i].text;
+            } else if (PorcentagemdeAcertosemCadaQuizz >= quizz.levels[i + 1].minValue) {
+                tituloLevel = quizz.levels[i + 1].title;
+                console.log(tituloLevel)
+                imagemLevel = quizz.levels[i + 1].image;
+                descricaoLevel = quizz.levels[i + 1].text;
+                console.log(descricaoLevel)
+            }
+        }
+        aparecerNível.querySelector('p').innerHTML =  Math.round(PorcentagemdeAcertosemCadaQuizz) + "% de acerto: " + tituloLevel;
+        aparecerNível.querySelector('img.FotoNível').src = imagemLevel;
+        aparecerNível.querySelector('.DescricaoNível').innerHTML = descricaoLevel;
+
+    }
 }
 
 function renderizarPerguntas() {
+
     const elemento = document.querySelector('.container');
     elemento.style.width = '100%';
     elemento.style.marginTop = '69px';
@@ -29,7 +129,7 @@ function renderizarPerguntas() {
 
     template += `
         <div class="quizz">
-          <div class="fotoquizz">
+          <div data-test="banner" class="fotoquizz">
             <img class="capa" src="${quizz.image}" />
           </div>
           <p class="titulocentral">${quizz.title}</p>
@@ -39,8 +139,8 @@ function renderizarPerguntas() {
     for (let j = 0; j < quizz.questions.length; j++) {
         // Adicione um atributo de estilo para o elemento do título da pergunta
         template += `
-          <div class="pergunta">
-            <p class="enunciado" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
+          <div data-test="question" class="perguntaporpergunta">
+            <p data-test="question-title" class="enunciado" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
             <div class="fotosperguntas">
         `;
 
@@ -53,11 +153,13 @@ function renderizarPerguntas() {
 
         for (let k = 0; k < respostas.length && k < 4; k++) {
             template += `
-            <div class="fotoenome">
+            <div data-test="answer" class="fotoenome">
               <div class="imagem">
-                <img class="imagem1" onclick="selecionarRespostas(this)" src="${respostas[k].image}" />
+              <img class="imagem1" onclick="selecionarRespostas(this, this.closest('.perguntaporpergunta'))" src="${respostas[k].image}" />
               </div>
-              <p class="resposta">${respostas[k].text}</p>
+              <p data-test="answer-text" class="respostaemcima">${respostas[k].text}</p>
+              <p data-test="answer-text" class="resposta ${respostas[k].isCorrectAnswer} display">${respostas[k].text}</p>
+              <p class="falseoutrue">${respostas[k].isCorrectAnswer}</p>
             </div>
           `;
         }
@@ -69,15 +171,25 @@ function renderizarPerguntas() {
     }
 
     template += `
+    <div class="descobrirNivel escondido">
+        <p data-test="level-title" class="enunciadoNiveis"></p>
+        <div class="containercomNiveis">
+            <img data-test="level-img" class="FotoNível" src="${imagemLevel}">
+            <div data-test="level-text" class="DescricaoNível"></div>
+        </div>
+    </div>
+
+    <div class="reiniciaroQUIZZ escondido">
+        <div data-test="restart" class="BotaoReiniciarumQuizz" onclick = "ReiniciarOProprioQuizz()">Reiniciar Quizz</div>
+        <div data-test="go-home" class="BotaoRetornarAoMenu" onclick = "RecarregarPaginainicial()">Voltar pra home</div>
+    </div>
           </div>
         </div>
       `;
 
-    elemento.innerHTML = template;   
+    elemento.innerHTML = template;
+    window.scrollBy(0, -3000)
 }
-
-
-
 
 function erroBuscarUmQuizz(erro) {
     console.log(erro);
@@ -112,9 +224,9 @@ function renderizarQuizzes() {
         let
 
             template = `
-        <li class="Quizz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
-        <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
-        <p class = "titulo1">${quizzes[i].title}</p>
+        <li data-test="others-quiz" class="Quizz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
+            <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
+            <p class = "titulo1">${quizzes[i].title}</p>
         </li>
             `;
 
@@ -145,17 +257,17 @@ let contador = 8;
 let Pergunta = '';
 
 
-function numerodePerguntas () {
+function numerodePerguntas() {
     const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
 
     for (let i = 1; i < contador; i++) {
 
         perguntas.innerHTML += `<div class="perguntamini">
-        <span>Pergunta ${i+1}</span>
-        <img src="imgs/note.png" onclick="abrirPergunta(this, ${i +1})">
-    </div>`     
+        <span>Pergunta ${i + 1}</span>
+        <img src="imgs/note.png" onclick="abrirPergunta(this, ${i + 1})">
+    </div>`
     }
-    }
+}
 
 function criarPerguntas() {
     const criarQuizz = document.querySelector('.criarQuizz');
