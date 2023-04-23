@@ -1,31 +1,135 @@
 axios.defaults.headers.common['Authorization'] = 'D1tow2WsfGdVjgTVFdhmZiAi';
 let quizzes = [];
 let quizz;
-
-
-
-
+let contadorrespostascertas = 0;
+let contadortotalperguntas = 0;
+let quantidadedeperguntasquizz = 0;
+let PorcentagemdeAcertosemCadaQuizz = 0;
+let imagemLevel = '';
+let tituloLevel = '';
+let descricaoLevel = '';
+let quiZZZZZCriar = {};
+let numQuestions = 0;
+let numLevels = 0;
 
 axios.defaults.headers.common['Authorization'] = 'D1tow2WsfGdVjgTVFdhmZiAi';
 
-function selecionarRespostas(elemento) {
-      // Verifica se a opção já foi selecionada
-  if (elemento.classList.contains('selecionada')) {
-    return;
-  }
+function ReiniciarOProprioQuizz() {
+    contadorrespostascertas = 0;
+    contadortotalperguntas = 0;
+    quantidadedeperguntasquizz = 0;
+    PorcentagemdeAcertosemCadaQuizz = 0;
+    imagemLevel = '';
+    tituloLevel = '';
+    descricaoLevel = '';
+    renderizarPerguntas()
+}
 
-  const opcoesElementos = elemento.parentElement.querySelectorAll('.descricao');
+function scrollrecarregar() {
+    window.scrollBy(0, -3000)
+}
 
-  // Percorre todas as opções e remove a classe 'selecionada'
-  opcoesElementos.forEach((opcaoElemento) => {
-    opcaoElemento.classList.remove('selecionada');
-  });
+function RecarregarPaginainicial() {
+    location.reload();
+    scrollrecarregar()
+}
 
-  // Adiciona a classe 'selecionada' apenas na opção clicada
-  elemento.classList.add('selecionada');
+function scroll() {
+    window.scrollBy(0, 720)
+}
+function selecionarRespostas(elemento, pai) {
+    if (elemento.classList.contains('naoselecionada') === false && elemento.classList.contains('resposta1') === false) {
+    setTimeout(scroll, 2000);
+    console.log(elemento);
+    console.log(pai);
+    elemento.classList.remove('imagem1');
+    elemento.classList.add('imagem2');
+
+    const esbranquicarresposta = elemento.closest('.fotoenome').querySelector('.resposta');
+    console.log("A partir daqui");
+    console.log(esbranquicarresposta)
+    esbranquicarresposta.classList.add('resposta1');
+    esbranquicarresposta.classList.remove('resposta');
+
+    const imagens = pai.querySelectorAll('.imagem1');
+    imagens.forEach(elemento => {
+        elemento.classList.add('naoselecionada');
+    });
+
+    const respostas = pai.querySelectorAll('.resposta');
+
+    for (let i = 0; i < respostas.length; i++) {
+        respostas[i].classList.remove('display');
+        respostas[i].classList.add('naoselecionada');
+    }
+    const respostas2 = pai.querySelectorAll('.resposta1');
+
+    for (let i = 0; i < respostas2.length; i++) {
+        respostas2[i].classList.remove('display');
+    }
+
+    const respostas1 = pai.querySelectorAll('.respostaemcima');
+    console.log(respostas1)
+
+    for (let i = 0; i < respostas1.length; i++) {
+        respostas1[i].classList.add('display');
+    }
+
+    for (let i = 0; i < respostas2.length; i++) {
+        if (respostas2[i].classList.contains('true') === true && contadorrespostascertas <= quantidadedeperguntasquizz && respostas2[i].classList.contains('naoselecionada') === false) {
+            contadorrespostascertas++
+            console.log(respostas2)
+        }
+        console.log(contadorrespostascertas)
+    }
+    quantidadedeperguntasquizz = quizz.questions.length
+    console.log(quantidadedeperguntasquizz)
+    PorcentagemdeAcertosemCadaQuizz = (contadorrespostascertas / quantidadedeperguntasquizz * 100);
+    console.log(PorcentagemdeAcertosemCadaQuizz)
+
+    if (elemento.classList.contains('naoselecionada') === false) {
+        contadortotalperguntas++
+    }
+
+    if (contadortotalperguntas === quantidadedeperguntasquizz) {
+        const aparecerNível = document.querySelector('.descobrirNivel')
+        aparecerNível.classList.remove('escondido')
+        const aparecerRecarregar = document.querySelector('.reiniciaroQUIZZ')
+        aparecerRecarregar.classList.remove('escondido')
+
+        for (let i = 0; i < quizz.levels.length - 1; i++) {
+            if (quizz.levels[i].minValue <= PorcentagemdeAcertosemCadaQuizz &&
+                PorcentagemdeAcertosemCadaQuizz < quizz.levels[i + 1].minValue) {
+                tituloLevel = quizz.levels[i].title;
+                console.log(tituloLevel)
+                imagemLevel = quizz.levels[i].image;
+                descricaoLevel = quizz.levels[i].text;
+                console.log(descricaoLevel)
+            } else if (quizz.levels[i].minValue <= PorcentagemdeAcertosemCadaQuizz &&
+                PorcentagemdeAcertosemCadaQuizz > quizz.levels[i + 1].minValue && quizz.levels[i + 1].minValue < quizz.levels[i].minValue) {
+                tituloLevel = quizz.levels[i].title;
+                console.log(tituloLevel)
+                imagemLevel = quizz.levels[i].image;
+                descricaoLevel = quizz.levels[i].text;
+            } else if (PorcentagemdeAcertosemCadaQuizz >= quizz.levels[i + 1].minValue) {
+                tituloLevel = quizz.levels[i + 1].title;
+                console.log(tituloLevel)
+                imagemLevel = quizz.levels[i + 1].image;
+                descricaoLevel = quizz.levels[i + 1].text;
+                console.log(descricaoLevel)
+            }
+        }
+        aparecerNível.querySelector('p').innerHTML =  Math.round(PorcentagemdeAcertosemCadaQuizz) + "% de acerto: " + tituloLevel;
+        aparecerNível.querySelector('img.FotoNível').src = imagemLevel;
+        aparecerNível.querySelector('.DescricaoNível').innerHTML = descricaoLevel;
+
+    }
+}
+console.log(2)
 }
 
 function renderizarPerguntas() {
+
     const elemento = document.querySelector('.container');
     elemento.style.width = '100%';
     elemento.style.marginTop = '69px';
@@ -34,7 +138,7 @@ function renderizarPerguntas() {
 
     template += `
         <div class="quizz">
-          <div class="fotoquizz" data-test="banner">
+          <div data-test="banner" class="fotoquizz">
             <img class="capa" src="${quizz.image}" />
           </div>
           <p class="titulocentral">${quizz.title}</p>
@@ -44,8 +148,8 @@ function renderizarPerguntas() {
     for (let j = 0; j < quizz.questions.length; j++) {
         // Adicione um atributo de estilo para o elemento do título da pergunta
         template += `
-          <div class="pergunta" data-test="question" >
-            <p class="enunciado" data-test="question-title" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
+          <div data-test="question" class="perguntaporpergunta">
+            <p data-test="question-title" class="enunciado" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
             <div class="fotosperguntas">
         `;
 
@@ -58,11 +162,13 @@ function renderizarPerguntas() {
 
         for (let k = 0; k < respostas.length && k < 4; k++) {
             template += `
-            <div class="fotoenome" data-test="answer">
+            <div data-test="answer" class="fotoenome">
               <div class="imagem">
-                <img class="imagem1" onclick="selecionarRespostas(this)" src="${respostas[k].image}" />
+              <img class="imagem1" onclick="selecionarRespostas(this, this.closest('.perguntaporpergunta'))" src="${respostas[k].image}" />
               </div>
-              <p class="resposta" data-test="answer-text">${respostas[k].text}</p>
+              <p data-test="answer-text" class="respostaemcima">${respostas[k].text}</p>
+              <p data-test="answer-text" class="resposta ${respostas[k].isCorrectAnswer} display">${respostas[k].text}</p>
+              <p class="falseoutrue">${respostas[k].isCorrectAnswer}</p>
             </div>
           `;
         }
@@ -74,15 +180,25 @@ function renderizarPerguntas() {
     }
 
     template += `
+    <div class="descobrirNivel escondido">
+        <p data-test="level-title" class="enunciadoNiveis"></p>
+        <div class="containercomNiveis">
+            <img data-test="level-img" class="FotoNível" src="${imagemLevel}">
+            <div data-test="level-text" class="DescricaoNível"></div>
+        </div>
+    </div>
+
+    <div class="reiniciaroQUIZZ escondido">
+        <div data-test="restart" class="BotaoReiniciarumQuizz" onclick = "ReiniciarOProprioQuizz()">Reiniciar Quizz</div>
+        <div data-test="go-home" class="BotaoRetornarAoMenu" onclick = "RecarregarPaginainicial()">Voltar pra home</div>
+    </div>
           </div>
         </div>
       `;
 
-    elemento.innerHTML = template;   
+    elemento.innerHTML = template;
+    window.scrollBy(0, -3000)
 }
-
-
-
 
 function erroBuscarUmQuizz(erro) {
     console.log(erro);
@@ -114,11 +230,12 @@ function renderizarQuizzes() {
     let template;
 
     for (let i = 0; i < quizzes.length; i++) {
-        
-        template = `
-        <li class="Quizz" data-test="others-quiz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
-        <img class="Quizz-img" data-test="others-quiz" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
-        <p class = "titulo1">${quizzes[i].title}</p>
+        let
+
+            template = `
+        <li data-test="others-quiz" class="Quizz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
+            <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
+            <p class = "titulo1">${quizzes[i].title}</p>
         </li>
             `;
 
@@ -147,26 +264,7 @@ function buscarTodosOsQuizzes() {
 buscarTodosOsQuizzes();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // fim da parte da NAT... INICIO PARTE DO HENRIQUE ... 
-
-
-
-
-
 
 
 
@@ -180,16 +278,21 @@ buscarTodosOsQuizzes();
 
 //Variavel Global 
 
-let criarQuizz = []
-criarQuizz.questions = []
+function firstButton() {
 
+    const index = document.querySelector('.pagina1');
+    const criarQuizzzz = document.querySelector('.criarQuizz');
 
-function criarPerguntas() {
+    index.classList.add('escondido');
+    criarQuizzzz.classList.remove('escondido');
+}
 
-    validarinput();
+function secondButton() {
+
+   /* validarinput();
     if (mensagem !== '') {
         return alert(mensagem), mensagem = '';
-    }
+    }*/
 
     // Adicionar e remover ESCONDIDO
 
@@ -199,179 +302,99 @@ function criarPerguntas() {
     mudarClasse.classList.add('escondido')
     criarPerguntas.classList.remove('escondido')
 
-    // Valores dos Inputs: comece pelo comeco.. 
-   
-    const titulo = document.querySelector('.titulodoquizz').value 
-    const urlImg = document.querySelector('.imagem-capa').value
-    const qntdPerguntas = document.querySelector('.qtde-perguntas').value
-    const qntdNiveis = document.querySelector('.qtde-niveis').value
-
-    const inputs = [titulo, urlImg, qntdPerguntas, qntdNiveis]    
-    
-    console.log(inputs)
-    
-    getValueImputs(inputs)
-
-
+    // pega os valores dos inputs
+    const title = document.querySelector('#title').value;
+    const image = document.querySelector('#url-img').value;
+    numQuestions = document.querySelector('#qntd-perguntas').value;
+    numLevels = document.querySelector('#qntd-nvl').value;
+  
+    // cria o objeto base
+    quiZZZZZCriar = {
+      title: title,
+      image: image,
+      questions: [],
+      levels: []
+    };
+    console.log(quiZZZZZCriar)
+}
+  
+    function terceiroButton () {
+    // adiciona as perguntas ao objeto
+    for (let i = 1; i <= numQuestions; i++) {
+        const questionTitle = document.querySelector(`input.text-pergunta${i}`).value;
+        const questionColor = document.querySelector(`input.cor-pergunta${i}`).value;
+        const correctAnswer = document.querySelector(`input.correta-pergunta${i}`).value;
+        const correctAnswerImage = document.querySelector(`input.url-certa-pergunta${i}`).value;
+        const wrongAnswer1 = document.querySelector(`input.incorreta1-pergunta${i}`).value;
+        const wrongAnswer1Image = document.querySelector(`input.url-incorreta${i}`).value;
+        const wrongAnswer2 = document.querySelector(`input.incorreta2-pergunta${i}`).value;
+        const wrongAnswer2Image = document.querySelector(`input.url-incorreta${i}`).value;
+        const wrongAnswer3 = document.querySelector(`input.incorreta3-pergunta${i}`).value;
+        const wrongAnswer3Image = document.querySelector(`input.url-incorreta${i}`).value;
+  
+      const question = {
+        title: questionTitle,
+        color: questionColor,
+        answers: [
+          {
+            text: correctAnswer,
+            image: correctAnswerImage,
+            isCorrectAnswer: true
+          },
+          {
+            text: wrongAnswer1,
+            image: wrongAnswer1Image,
+            isCorrectAnswer: false
+          },
+          {
+            text: wrongAnswer2,
+            image: wrongAnswer2Image,
+            isCorrectAnswer: false
+          },
+          {
+            text: wrongAnswer3,
+            image: wrongAnswer3Image,
+            isCorrectAnswer: false
+          }
+        ]
+      };
+  
+      quiZZZZZCriar.questions.push(question);
+      console.log(quiZZZZZCriar)
     }
-
-// pegar valores dos imputs
-
-function getValueImputs(put){
-criarQuizz.title = put[0]
-criarQuizz.image = put[1]
-
-MakeArrayPerguntas(Number(put[2]))
-
 }
 
-// calcular numero de perguntas 
-
-
-function MakeArrayPerguntas(put){
-
-    // construcao da Array "criarQuizz"
-    
-    const perguntas = {
-        title: "",
-        color: "",
-        answers: []
+    function Niveis () {
+    // adiciona os níveis ao objeto
+    for (let i = 1; i <= numLevels; i++) {
+      const levelTitle = document.querySelector(`input.titulo-nivel${i}`).value;
+      const levelImage = document.querySelector(`input.url-nivel${i}`).value;
+      const levelDescription = document.querySelector(`textarea.descricao-nivel${i}`).value;
+      const levelMinValue = document.querySelector(`input.acerto-nivel${i}`).value;
+  
+      const level = {
+        title: levelTitle,
+        image: levelImage,
+        text: levelDescription,
+        minValue: Number(levelMinValue)
+      };
+  
+      quiZZZZZCriar.levels.push(level);
     }
-    const respostaTrue = {
-        text: "",
-        image: "",
-        isCorrectAnswer: true
-    }
-    const respostaFalse = {
-        text: "",
-        image: "",
-        isCorrectAnswer: false
-    }
-
-    
-
-    
-    for(i=0;i<put;i++){
-        criarQuizz.questions.push(perguntas)
-    }
-
-    console.log(criarQuizz)
-
-    /* 
-    let c = 0
-
-    for(i=0;i<put;i++){
-        if(c < 4){
-            if(c === 0){
-     criarQuizz.questions[2].answers[c] = respostaTrue
-         }else { criarQuizz.questions[2].answers[c] = respostaFalse}
-    }
-    c++
-    }
-
-    */
-
-
-
+  
+    console.log(quiZZZZZCriar); // ou envie o objeto por meio de uma requisição Axios
+  
+    const promise = axios.post("https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes", quiZZZZZCriar)
+    promise.then(response => {
+      console.log(response);
+    })
+    promise.catch(error => {
+      console.error(error);
+    });
+  
+  }
 
   
-
-
-    /* 
-    criarQuizz.questions = []
-    criarQuizz.questions.length = put
-    
-    for(i=0;i<put;i++){
-        criarQuizz.questions[i] = perguntas
-    }
-    
-    criarQuizz.questions[2].answers.length = 4 
-    console.log(criarQuizz)
-    let c = 0
-    for(i=0;i<put;i++){
-        if(c < 4){
-            if(c === 0){
-     criarQuizz.questions[2].answers[c] = respostaTrue
-         }else { criarQuizz.questions[2].answers[c] = respostaFalse}
-    }
-    c++
-    }
-    */
-
-  
-}
-
-
-
-
-
-// pegar valores dos inputs das PERGUNTAS 
-var trocaName = "";
-GetValuePerguntas()
-function GetValuePerguntas(){
-   
-    const txtPergunta = []
-    const corPergunta = []
-    
-    for(i=0; i <5;i++){
-        trocaName = perguntas + i
-
-        const perguntas = {
-            title: document.querySelector(`.text-pergunta${i+1}`).value,
-            color: document.querySelector(`.cor-pergunta${i+1}`).value,
-            answers: []
-        }
-
-        
-        
-
-        
-
-        
-        
-        //txtPergunta.push(texto)
-        //corPergunta.push(cor)
-        // inputPerguntas(i, txtPergunta, corPergunta)
-        //criarQuizz.questions[i].title = texto
-        //criarQuizz.questions[i].color = cor
-    }
-
-
-
-
-     
-
-    function inputPerguntas(i, txtPergunta, corPergunta){
-        criarQuizz.questions[i].title = txtPergunta[i]
-        criarQuizz.questions[i].color = corPergunta[i]
-        console.log( criarQuizz.questions[i].color[i][i])
-    }
-
-    let i = 0
-    //let txtPergunta = document.querySelector(`.text-pergunta${i+1}`).value
-    //let corPergunta = document.querySelector(`.cor-pergunta${i+1}`).value
-   
-    for(i=0;i<Number(qntdPerguntas);i++){
-        criarQuizz.questions[i].title = txtPergunta
-        criarQuizz.questions[i].color = corPergunta
-    }
-
-      
-        if( c <Number(qntdPerguntas)){
-            criarQuizz.questions[i].title = txtPergunta
-            criarQuizz.questions[i].color = corPergunta
-        }
-        c++
-
-
-   
-
-    }
-
-
-
-
-
 
 // FIM DA PARTE DO HENRIQUE .... INICIO DA PARTE DO LUIGI 
 
@@ -433,7 +456,7 @@ function numerodePerguntas () {
 
         perguntas.innerHTML += `<div class="perguntamini" data-test="question-ctn">
         <span>Pergunta ${i+1}</span>
-        <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, ${i +1})">
+        <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, ${i + 1})">
     </div>`     
     }
     }
@@ -451,10 +474,10 @@ function fazerPost(){
 
 function abrirPergunta(pergunta, i) {
     // const abrirPergunta2 = document.querySelector('.pergunta2mini')
-    console.log(i);
-    console.log(pergunta);
+    // console.log(i);
+    //console.log(pergunta);
     Pergunta = pergunta.parentNode;
-    console.log(pergunta.parentNode.innerHTML);
+    //console.log(pergunta.parentNode.innerHTML);
     //const numero = Pergu
     Pergunta.classList.add('pergunta')
     Pergunta.classList.remove('perguntamini')
@@ -474,19 +497,19 @@ function abrirPergunta(pergunta, i) {
     <span class=''>Respostas incorretas</span>
     <div class='incorreta1'>
         <input data-test="wrong-answer-input" type='text' class='incorreta1-pergunta${i}' placeholder='Resposta incorreta 1'>
-        <input data-test="wrong-img-input" type='text' class='incorreta2-pergunta${i}' placeholder='URL da imagem 1'>
+        <input data-test="wrong-img-input" type='text' class='url-incorreta1${i}' placeholder='URL da imagem 1'>
     </div>
     <div class='incorreta2'>
         <input data-test="wrong-answer-input" type='text' class='incorreta2-pergunta${i}' placeholder='Resposta incorreta 2'>
-        <input data-test="wrong-img-input" type='text' class='incorreta2-pergunta${i}' placeholder='URL da imagem 2'>
+        <input data-test="wrong-img-input" type='text' class='url-incorreta2${i}' placeholder='URL da imagem 2'>
     </div>
     <div class='incorreta3'>
         <input data-test="wrong-answer-input" type='text' class='incorreta3-pergunta${i}' placeholder='Resposta incorreta 3'>
-        <input data-test="wrong-img-input" type='text' class='incorreta3-pergunta${i}' placeholder='URL da imagem 3'>
+        <input data-test="wrong-img-input" type='text' class='url-incorreta3${i}' placeholder='URL da imagem 3'>
     </div>
 </div> 
 </div>`;
-console.log(Pergunta)
+console.log(document.querySelector(`.url-certa${i}`))
 }
 
 
@@ -523,7 +546,7 @@ function abrirnivel (nivel, i) {
     Nivel.innerHTML = `<div class="informacoes" data-test="level-ctn">
     <p>nível ${i}</p>
     <input type="text" data-test="level-input" class="titulo-nivel${i}" placeholder="Título do nível">
-    <input type="text" data-test="level-percent-input" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
+    <input type="text" data-test="level-percent-input" class="acerto-nivel${i}" placeholder="% de acerto mínima">
     <input type="text" data-test="level-img-input" class="url-nivel${i}" placeholder="URL da imagem do nível">
     <textarea type='text' data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível"></textarea>
 </div>`
