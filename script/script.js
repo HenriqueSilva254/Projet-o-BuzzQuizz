@@ -289,10 +289,10 @@ function firstButton() {
 
 function secondButton() {
 
-   /* validarinput();
+    validarinput();
     if (mensagem !== '') {
         return alert(mensagem), mensagem = '';
-    }*/
+    }
 
     // Adicionar e remover ESCONDIDO
 
@@ -463,13 +463,6 @@ function numerodePerguntas () {
 
 
 
-function fazerPost(){
-    const promisse = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes', criarQuizz)
-    //criarQuizz.classList.add('escondido');
-    criarPerguntas.classList.remove('escondido');
-
-    // numerodePerguntas();
-}
 
 
 function abrirPergunta(pergunta, i) {
