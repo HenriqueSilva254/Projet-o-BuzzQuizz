@@ -117,7 +117,7 @@ function renderizarQuizzes() {
         
         template = `
         <li class="Quizz" data-test="others-quiz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
-        <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
+        <img class="Quizz-img" data-test="others-quiz" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
         <p class = "titulo1">${quizzes[i].title}</p>
         </li>
             `;
@@ -172,48 +172,48 @@ buscarTodosOsQuizzes();
 
 // console.log(document.getElementById(title).value)
 
-const criarQuizz = {}
-const qntdPerguntas = document.querySelector('.qtde-perguntas').value
-const qntdNiveis = document.querySelector('.qtde-niveis').value
 
-// verificar se é uma URL 
-
-// function checkUrl(string) {
-//     try {
-//      let url = new URL(string)
-//      criarPerguntas()
-//    } catch(err) {
-//     alert("insira uma URL correta") 
-//     criarPerguntas()
-//    }
- 
-//  }
+//const qntdPerguntas = document.querySelector('.qtde-perguntas')
+//const qntdNiveis = document.querySelector('.qtde-niveis')
 
 // adicionar clsse e remover... e pegar valores dos inputs
 
+//Variavel Global 
+
+let criarQuizz = []
+criarQuizz.questions = []
+
+
 function criarPerguntas() {
-    const criarQuizzzz = document.querySelector('.criarQuizz');
+
+    validarinput();
+    if (mensagem !== '') {
+        return alert(mensagem), mensagem = '';
+    }
+
+    // Adicionar e remover ESCONDIDO
+
+    const mudarClasse = document.querySelector('.criarQuizz');
     const criarPerguntas = document.querySelector('.criarPerguntas');
 
+    mudarClasse.classList.add('escondido')
+    criarPerguntas.classList.remove('escondido')
+
     // Valores dos Inputs: comece pelo comeco.. 
-
-    const titulo = document.querySelector('.titulo3').value
+   
+    const titulo = document.querySelector('.titulodoquizz').value 
     const urlImg = document.querySelector('.imagem-capa').value
-    
-    const inputs = [titulo, urlImg, qntdPerguntas, qntdNiveis]
+    const qntdPerguntas = document.querySelector('.qtde-perguntas').value
+    const qntdNiveis = document.querySelector('.qtde-niveis').value
 
-    //if(qntdPerguntas >= 3 && qntdNiveis >= 2 && titulo.length > 20 && titulo.length < 65 ){
-        criarQuizzzz.classList.add('escondido')
-      criarPerguntas.classList.remove('escondido')
-    //    getValueImputs(inputs)
-        
+    const inputs = [titulo, urlImg, qntdPerguntas, qntdNiveis]    
     
-    console.log(criarQuizz)
+    console.log(inputs)
     
-    
-    
-     getValueImputs(inputs)
-}
+    getValueImputs(inputs)
+
+
+    }
 
 // pegar valores dos imputs
 
@@ -222,6 +222,7 @@ criarQuizz.title = put[0]
 criarQuizz.image = put[1]
 
 MakeArrayPerguntas(Number(put[2]))
+
 }
 
 // calcular numero de perguntas 
@@ -246,7 +247,37 @@ function MakeArrayPerguntas(put){
         image: "",
         isCorrectAnswer: false
     }
+
     
+
+    
+    for(i=0;i<put;i++){
+        criarQuizz.questions.push(perguntas)
+    }
+
+    console.log(criarQuizz)
+
+    /* 
+    let c = 0
+
+    for(i=0;i<put;i++){
+        if(c < 4){
+            if(c === 0){
+     criarQuizz.questions[2].answers[c] = respostaTrue
+         }else { criarQuizz.questions[2].answers[c] = respostaFalse}
+    }
+    c++
+    }
+
+    */
+
+
+
+
+  
+
+
+    /* 
     criarQuizz.questions = []
     criarQuizz.questions.length = put
     
@@ -265,7 +296,9 @@ function MakeArrayPerguntas(put){
     }
     c++
     }
-    console.log(criarQuizz)
+    */
+
+  
 }
 
 
@@ -273,25 +306,34 @@ function MakeArrayPerguntas(put){
 
 
 // pegar valores dos inputs das PERGUNTAS 
-
-
+var trocaName = "";
+GetValuePerguntas()
 function GetValuePerguntas(){
    
-    //const txtPergunta = []
-    //const corPergunta = []
-    let c = 0
-    for(i=0; i <Number(qntdPerguntas);i++){
+    const txtPergunta = []
+    const corPergunta = []
+    
+    for(i=0; i <5;i++){
+        trocaName = perguntas + i
+
+        const perguntas = {
+            title: document.querySelector(`.text-pergunta${i+1}`).value,
+            color: document.querySelector(`.cor-pergunta${i+1}`).value,
+            answers: []
+        }
+
         
-        let texto = document.querySelector(`.text-pergunta${c+1}`).value
-        let cor = document.querySelector(`.cor-pergunta${c+1}`).value
         
-        criarQuizz.questions[c].title = texto
-        criarQuizz.questions[c].color = cor
-        c++
-        console.log(criarQuizz.questions[c])
+
+        
+
+        
+        
         //txtPergunta.push(texto)
         //corPergunta.push(cor)
         // inputPerguntas(i, txtPergunta, corPergunta)
+        //criarQuizz.questions[i].title = texto
+        //criarQuizz.questions[i].color = cor
     }
 
 
@@ -306,8 +348,8 @@ function GetValuePerguntas(){
     }
 
     let i = 0
-    let txtPergunta = document.querySelector(`.text-pergunta${i+1}`).value
-    let corPergunta = document.querySelector(`.cor-pergunta${i+1}`).value
+    //let txtPergunta = document.querySelector(`.text-pergunta${i+1}`).value
+    //let corPergunta = document.querySelector(`.cor-pergunta${i+1}`).value
    
     for(i=0;i<Number(qntdPerguntas);i++){
         criarQuizz.questions[i].title = txtPergunta
@@ -344,8 +386,37 @@ function GetValuePerguntas(){
 
 let Pergunta = '';
 let Nivel = ''
+let mensagem = '';
+
+function validarinput() {
+    const titulo = document.querySelector('.titulodoquizz').value;
+    const capa = document.querySelector(".imagem-capa").value;
+    const verificador = capa.slice(0, 8)
+    const qntdep = Number(document.querySelector('.qtde-perguntas').value);
+    const qtndel = Number(document.querySelector('.qtde-niveis').value);
+    
+    if(titulo.length < 20 || titulo.length > 65) {
+        mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
+    }
+    if (verificador !== 'https://') {
+        mensagem += "cheque se sua imagem é válida \n"
+    }
+    if (qntdep < 3) {
+        mensagem += "Cheque se a quantidade de perguntas é no minimo 3 \n"
+    }    
+    if (qtndel < 2) {
+        mensagem += "Cheque se a quantidade de níveis é no minimo 2 \n"
+    }
+    
+    
+    // if (mensagem !== '') {
+    //     alert(mensagem)
+    // }
+
+}
 
 function criarQuizzz() {
+
     const index = document.querySelector('.pagina1');
     const criarQuizzzz = document.querySelector('.criarQuizz');
 
@@ -354,6 +425,8 @@ function criarQuizzz() {
 }
 
 function numerodePerguntas () {
+
+    
     const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
     const numero = Number( document.querySelector('.qtde-perguntas').value)
     for (let i = 1; i < numero; i++) {
@@ -386,7 +459,7 @@ function abrirPergunta(pergunta, i) {
     Pergunta.classList.add('pergunta')
     Pergunta.classList.remove('perguntamini')
 
-    Pergunta.innerHTML = `<div class='pergunta'>
+    Pergunta.innerHTML = `<div class='pergunta' data-test="question-ctn" >
 <div data-test="question-ctn" class='info'>
     <span>Pergunta ${i}</span> 
     <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
@@ -418,6 +491,7 @@ console.log(Pergunta)
 
 
 function decidirNiveis() {
+
     const criarPerguntas = document.querySelector('.criarPerguntas');
     const decidirNiveis = document.querySelector('.decidirNiveis');
 
@@ -429,8 +503,9 @@ function decidirNiveis() {
 
 function numerodeNiveis () {
     const niveis = document.querySelector('.decidirNiveis .outrosNiveis')
+    const numero = Number(document.querySelector('.qtde-niveis').value)
 
-    for (let i = 1; i < qntdNiveis; i++) {
+    for (let i = 1; i < numero; i++) {
 
         niveis.innerHTML += `<div class="nivelmini" data-test="toggle">
         <span>nível ${i+1}</span>
@@ -438,6 +513,7 @@ function numerodeNiveis () {
     </div>`     
     }
 }
+
 function abrirnivel (nivel, i) {
     Nivel = nivel.parentNode;
     //const numero = Pergu
@@ -449,7 +525,7 @@ function abrirnivel (nivel, i) {
     <input type="text" data-test="level-input" class="titulo-nivel${i}" placeholder="Título do nível">
     <input type="text" data-test="level-percent-input" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
     <input type="text" data-test="level-img-input" class="url-nivel${i}" placeholder="URL da imagem do nível">
-    <input type="textarea" data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível">
+    <textarea type='text' data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível"></textarea>
 </div>`
 
 }

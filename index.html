@@ -41,14 +41,10 @@
         </div>
         <div class="informacoes">
             
-            <input data-test="title-input" minlength="20" maxlength="65" type="text" class="titulo3" placeholder="Título do seu quizz" value="opaaaaaaaaaaaaaaaaaaaa">
-            <input data-test="img-input"  type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz" value="https://hub.driven.com.br/tempo-de-codigo">
-            <input data-test="questions-amount-input"  type="text" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz"  >
-            <input data-test="levels-amount-input"  type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz" value ="3">
-           
-            <script src="./script/scriptPost.js" defer></script>
-           
-        
+            <input data-test="title-input" id="title" minlength="20" maxlength="65" type="text" class="titulodoquizz" placeholder="Título do seu quizz" >
+            <input data-test="img-input" id="url-img" type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz" value="https://hub.driven.com.br/tempo-de-codigo">
+            <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz">
+            <input data-test="levels-amount-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
         </div>
         <button  data-test="go-create-questions" onclick="numerodePerguntas(), criarPerguntas() ">Prosseguir para criar perguntas</button>
         <!--/*, checkUrl(document.querySelector('.imagem-capa').value)*/-->
@@ -57,12 +53,12 @@
         <div>
             <p class="informacoes">Crie suas perguntas</p>
         </div>
-        <div data-test="question-ctn" class="pergunta1">
+        <!-- <div data-test="question-ctn" class="pergunta1"> -->
             <!-- <div class="info1"> -->
         <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
-        <div class="pergunta">
+        <div  data-test="question-ctn" class="pergunta">
             <div class="info">
-                <span>Pergunta 1</span>
+                <span>Pergunta 1 </span>
                 <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
                 <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
             </div>
@@ -91,8 +87,8 @@
         </div>    
         <button onclick="decidirNiveis()" data-test="go-create-levels">Prosseguir para criar níveis</button>
         <!-- decidirNiveis() GetValuePerguntas() -->
-        </div>
     </div>
+    <!-- </div> -->
     <div class="decidirNiveis escondido">
         <div>
             <span class="informacoes">Agora, decida os níveis</span>
@@ -102,13 +98,18 @@
                 <input type="text" data-test="level-input" class="titulo-nivel1" placeholder="Título do nível">
                 <input type="text" data-test="level-percent-input" class="%acerto-nivel1" placeholder="% de acerto mínima">
                 <input type="text" data-test="level-img-input" class="url-nivel1" placeholder="URL da imagem do nível">
-                <input type="textarea" data-test="level-description-input"  class="descricao-nivel1" placeholder="Descrição do nível">
+                <textarea type="text" data-test="level-description-input"  class="descricao-nivel1" placeholder="Descrição do nível"></textarea>
             </div>
-        </div>
+        
         <div class="decidirNiveis outrosNiveis">
             <button onclick="criar()" data-test="finish">Finalizar Quizz</button>
         </div>
+<<<<<<< HEAD
        
+=======
+        
+        <button onclick="criar()" data-test="finish">Finalizar Quizz</button>
+>>>>>>> 28fdc24646fdae24395c4ea65ff9c2512d9d06ea
     </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
