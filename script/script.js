@@ -113,7 +113,7 @@ function renderizarQuizzes() {
         
         template = `
         <li class="Quizz" data-test="others-quiz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
-        <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
+        <img class="Quizz-img" data-test="others-quiz" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
         <p class = "titulo1">${quizzes[i].title}</p>
         </li>
             `;
@@ -351,13 +351,13 @@ let Nivel = ''
 let mensagem = '';
 
 function validarinput() {
-    const titulo = Number(document.querySelector('.titulo').value);
+    const titulo = document.querySelector('.titulodoquizz').value;
     const capa = document.querySelector(".imagem-capa").value;
     const verificador = capa.slice(0, 8)
     const qntdep = Number(document.querySelector('.qtde-perguntas').value);
     const qtndel = Number(document.querySelector('.qtde-niveis').value);
     
-    if(titulo.length < 20 && titulo.length > 65) {
+    if(titulo.length < 20 || titulo.length > 65) {
         mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
     }
     if (verificador !== 'https://') {
@@ -389,7 +389,6 @@ function criarQuizzz() {
 function numerodePerguntas () {
 
     
-
     const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
     const numero = Number(document.querySelector('.qtde-perguntas').value)
     for (let i = 1; i < numero; i++) {
@@ -422,7 +421,7 @@ function abrirPergunta(pergunta, i) {
     Pergunta.classList.add('pergunta')
     Pergunta.classList.remove('perguntamini')
 
-    Pergunta.innerHTML = `<div class='pergunta'>
+    Pergunta.innerHTML = `<div class='pergunta' data-test="question-ctn" >
 <div data-test="question-ctn" class='info'>
     <span>Pergunta ${i}</span> 
     <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
@@ -466,8 +465,9 @@ function decidirNiveis() {
 
 function numerodeNiveis () {
     const niveis = document.querySelector('.decidirNiveis .outrosNiveis')
+    const numero = Number(document.querySelector('.qtde-niveis').value)
 
-    for (let i = 1; i < qntdNiveis; i++) {
+    for (let i = 1; i < numero; i++) {
 
         niveis.innerHTML += `<div class="nivelmini" data-test="toggle">
         <span>nível ${i+1}</span>
@@ -487,7 +487,7 @@ function abrirnivel (nivel, i) {
     <input type="text" data-test="level-input" class="titulo-nivel${i}" placeholder="Título do nível">
     <input type="text" data-test="level-percent-input" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
     <input type="text" data-test="level-img-input" class="url-nivel${i}" placeholder="URL da imagem do nível">
-    <input type="textarea" data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível">
+    <textarea type='text' data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível"></textarea>
 </div>`
 
 }
