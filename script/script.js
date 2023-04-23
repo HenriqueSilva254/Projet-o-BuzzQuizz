@@ -29,9 +29,9 @@ function renderizarPerguntas() {
     let template = '';
 
     template += `
-        <div class="quizz">
+        <div class="quizz" data-test="others-quiz">
           <div class="fotoquizz" data-test="banner">
-            <img class="capa" src="${quizz.image}" />
+            <img data-test="others-quiz" class="capa" src="${quizz.image}" />
           </div>
           <p class="titulocentral">${quizz.title}</p>
           <div class="perguntas-respostas">
@@ -40,7 +40,7 @@ function renderizarPerguntas() {
     for (let j = 0; j < quizz.questions.length; j++) {
         // Adicione um atributo de estilo para o elemento do título da pergunta
         template += `
-          <div class="pergunta" data-test="question" >
+          <div class="pergunta" data-test="question">
             <p class="enunciado" data-test="question-title" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
             <div class="fotosperguntas">
         `;
@@ -356,8 +356,9 @@ function validarinput() {
     const verificador = capa.slice(0, 8)
     const qntdep = Number(document.querySelector('.qtde-perguntas').value);
     const qtndel = Number(document.querySelector('.qtde-niveis').value);
-    
-    if(titulo.length < 20 || titulo.length > 65) {
+    console.log(titulo, capa, verificador, qntdep, qtndel);
+
+    if(titulo.length <= 20 || titulo.length >= 65) {
         mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
     }
     if (verificador !== 'https://') {
@@ -413,17 +414,25 @@ function fazerPost(){
 
 function abrirPergunta(pergunta, i) {
     // const abrirPergunta2 = document.querySelector('.pergunta2mini')
+    
+
     console.log(i);
     console.log(pergunta);
     Pergunta = pergunta.parentNode;
     console.log(pergunta.parentNode.innerHTML);
+    console.log(Pergunta)
+
+
     //const numero = Pergu
     Pergunta.classList.add('pergunta')
     Pergunta.classList.remove('perguntamini')
-
-    Pergunta.innerHTML = `<div class='pergunta' data-test="question-ctn" >
-<div data-test="question-ctn" class='info'>
-    <span>Pergunta ${i}</span> 
+    Pergunta.classList.add('aberta')
+    Pergunta.innerHTML = `
+<div data-test="question-ctn" class='info aberta'>
+    <div class="perguntamini" data-test="question-ctn">
+            <span>Pergunta ${i}</span>
+            <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, ${i})">
+    </div>
     <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
     <input data-test="question-color-input" type='text' class='cor-pergunta${i}' placeholder='Cor de fundo da pergunta'>
 </div>
@@ -446,9 +455,8 @@ function abrirPergunta(pergunta, i) {
         <input data-test="wrong-answer-input" type='text' class='incorreta3-pergunta${i}' placeholder='Resposta incorreta 3'>
         <input data-test="wrong-img-input" type='text' class='incorreta3-pergunta${i}' placeholder='URL da imagem 3'>
     </div>
-</div> 
-</div>`;
-console.log(Pergunta)
+</div> `;
+console.log(Pergunta);
 }
 
 

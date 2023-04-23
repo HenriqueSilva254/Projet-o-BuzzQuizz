@@ -46,7 +46,7 @@
             <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz">
             <input data-test="levels-amount-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
         </div>
-        <button data-test="go-create-questions" onclick="numerodePerguntas(), criarPerguntas() /*, checkUrl(document.querySelector('.imagem-capa').value)*/">Prosseguir para criar perguntas</button>
+        <button data-test="go-create-questions" onclick="numerodePerguntas(), criarPerguntas()">Prosseguir para criar perguntas</button>
     </div>
     <div class="criarPerguntas escondido">
         <div>
@@ -57,7 +57,10 @@
         <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
         <div  data-test="question-ctn" class="pergunta">
             <div class="info">
-                <span>Pergunta 1 </span>
+                <div class="perguntamini" data-test="question-ctn">
+                    <span>Pergunta 1</span>
+                    <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, 1)">
+                </div>
                 <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
                 <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
             </div>
