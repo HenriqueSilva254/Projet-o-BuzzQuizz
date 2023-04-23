@@ -2,6 +2,10 @@ axios.defaults.headers.common['Authorization'] = 'D1tow2WsfGdVjgTVFdhmZiAi';
 let quizzes = [];
 let quizz;
 
+
+
+
+
 axios.defaults.headers.common['Authorization'] = 'D1tow2WsfGdVjgTVFdhmZiAi';
 
 function selecionarRespostas(elemento) {
@@ -30,7 +34,7 @@ function renderizarPerguntas() {
 
     template += `
         <div class="quizz">
-          <div class="fotoquizz">
+          <div class="fotoquizz" data-test="banner">
             <img class="capa" src="${quizz.image}" />
           </div>
           <p class="titulocentral">${quizz.title}</p>
@@ -40,8 +44,8 @@ function renderizarPerguntas() {
     for (let j = 0; j < quizz.questions.length; j++) {
         // Adicione um atributo de estilo para o elemento do título da pergunta
         template += `
-          <div class="pergunta">
-            <p class="enunciado" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
+          <div class="pergunta" data-test="question" >
+            <p class="enunciado" data-test="question-title" style="background-color: ${quizz.questions[j].color}">${quizz.questions[j].title}</p>
             <div class="fotosperguntas">
         `;
 
@@ -54,11 +58,11 @@ function renderizarPerguntas() {
 
         for (let k = 0; k < respostas.length && k < 4; k++) {
             template += `
-            <div class="fotoenome">
+            <div class="fotoenome" data-test="answer">
               <div class="imagem">
                 <img class="imagem1" onclick="selecionarRespostas(this)" src="${respostas[k].image}" />
               </div>
-              <p class="resposta">${respostas[k].text}</p>
+              <p class="resposta" data-test="answer-text">${respostas[k].text}</p>
             </div>
           `;
         }
@@ -110,10 +114,9 @@ function renderizarQuizzes() {
     let template;
 
     for (let i = 0; i < quizzes.length; i++) {
-        let
-
-            template = `
-        <li class="Quizz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
+        
+        template = `
+        <li class="Quizz" data-test="others-quiz" data-id="${quizzes[i].id}" onclick = "pegarId(event)">
         <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quizzes[i].image})"/>
         <p class = "titulo1">${quizzes[i].title}</p>
         </li>
@@ -167,51 +170,49 @@ buscarTodosOsQuizzes();
 
 
 
-
-
 // console.log(document.getElementById(title).value)
 
 const criarQuizz = {}
-const qntdPerguntas = document.getElementById('qntd-perguntas').value
-const qntdNiveis = document.getElementById('qntd-nvl').value
+const qntdPerguntas = document.querySelector('.qtde-perguntas').value
+const qntdNiveis = document.querySelector('.qtde-niveis').value
 
 // verificar se é uma URL 
 
-function checkUrl(string) {
-    try {
-     let url = new URL(string)
-     criarPerguntas()
-   } catch(err) {
-    alert("insira uma URL correta") 
-    criarPerguntas()
-   }
+// function checkUrl(string) {
+//     try {
+//      let url = new URL(string)
+//      criarPerguntas()
+//    } catch(err) {
+//     alert("insira uma URL correta") 
+//     criarPerguntas()
+//    }
  
- }
+//  }
 
 // adicionar clsse e remover... e pegar valores dos inputs
 
 function criarPerguntas() {
-    const criarQuizz = document.querySelector('.criarQuizz');
+    const criarQuizzzz = document.querySelector('.criarQuizz');
     const criarPerguntas = document.querySelector('.criarPerguntas');
 
     // Valores dos Inputs: comece pelo comeco.. 
 
-    const titulo = document.getElementById('title').value
-    const urlImg = document.getElementById('url-img').value
+    const titulo = document.querySelector('.titulo3').value
+    const urlImg = document.querySelector('.imagem-capa').value
     
     const inputs = [titulo, urlImg, qntdPerguntas, qntdNiveis]
 
-    if(qntdPerguntas >= 3 && qntdNiveis >= 2 && titulo.length > 20 && titulo.length < 65 ){
-        criarQuizz.classList.add('escondido')
-        criarPerguntas.classList.remove('escondido')
-        getValueImputs(inputs)
+    //if(qntdPerguntas >= 3 && qntdNiveis >= 2 && titulo.length > 20 && titulo.length < 65 ){
+        criarQuizzzz.classList.add('escondido')
+      criarPerguntas.classList.remove('escondido')
+    //    getValueImputs(inputs)
         
-    }else{alert("deu certo")}
-
+    
+    console.log(criarQuizz)
     
     
     
-    // getValueImputs(inputs)
+     getValueImputs(inputs)
 }
 
 // pegar valores dos imputs
@@ -267,7 +268,12 @@ function MakeArrayPerguntas(put){
     console.log(criarQuizz)
 }
 
+
+
+
+
 // pegar valores dos inputs das PERGUNTAS 
+
 
 function GetValuePerguntas(){
    
@@ -291,7 +297,7 @@ function GetValuePerguntas(){
 
 
 
-     /*
+     
 
     function inputPerguntas(i, txtPergunta, corPergunta){
         criarQuizz.questions[i].title = txtPergunta[i]
@@ -314,14 +320,11 @@ function GetValuePerguntas(){
             criarQuizz.questions[i].color = corPergunta
         }
         c++
-   */ 
-
-    console.log(criarQuizz)
-}
 
 
+   
 
-
+    }
 
 
 
@@ -339,19 +342,25 @@ function GetValuePerguntas(){
 
 
 
-
-
 let Pergunta = '';
+let Nivel = ''
 
+function criarQuizzz() {
+    const index = document.querySelector('.pagina1');
+    const criarQuizzzz = document.querySelector('.criarQuizz');
+
+    index.classList.add('escondido');
+    criarQuizzzz.classList.remove('escondido');
+}
 
 function numerodePerguntas () {
     const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
+    const numero = Number( document.querySelector('.qtde-perguntas').value)
+    for (let i = 1; i < numero; i++) {
 
-    for (let i = 1; i < qntdPerguntas; i++) {
-
-        perguntas.innerHTML += `<div class="perguntamini">
+        perguntas.innerHTML += `<div class="perguntamini" data-test="question-ctn">
         <span>Pergunta ${i+1}</span>
-        <img src="imgs/note.png" onclick="abrirPergunta(this, ${i +1})">
+        <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, ${i +1})">
     </div>`     
     }
     }
@@ -360,10 +369,10 @@ function numerodePerguntas () {
 
 function fazerPost(){
     const promisse = axios.post('https://mock-api.driven.com.br/api/vm/buzzquizz/quizzes', criarQuizz)
-    criarQuizz.classList.add('escondido');
+    //criarQuizz.classList.add('escondido');
     criarPerguntas.classList.remove('escondido');
 
-    numerodePerguntas();
+    // numerodePerguntas();
 }
 
 
@@ -378,32 +387,33 @@ function abrirPergunta(pergunta, i) {
     Pergunta.classList.remove('perguntamini')
 
     Pergunta.innerHTML = `<div class='pergunta'>
-<div class='info'>
+<div data-test="question-ctn" class='info'>
     <span>Pergunta ${i}</span> 
-    <input type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
-    <input type='text' class='cor-pergunta${i}' placeholder='Cor de fundo da pergunta'>
+    <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
+    <input data-test="question-color-input" type='text' class='cor-pergunta${i}' placeholder='Cor de fundo da pergunta'>
 </div>
 <div class='correta'>
     <span>Resposta correta</span>
-    <input type='text' class='correta-pergunta${i}' placeholder='Resposta correta'>
-    <input type='text' class='url-certa-pergunta${i}' placeholder='URL da imagem'>
+    <input data-test="correct-answer-input" type='text' class='correta-pergunta${i}' placeholder='Resposta correta'>
+    <input data-test="correct-img-input" type='text' class='url-certa-pergunta${i}' placeholder='URL da imagem'>
 </div>
 <div class='incorretas1'>
     <span class=''>Respostas incorretas</span>
     <div class='incorreta1'>
-        <input type='text' class='incorreta1-pergunta${i}' placeholder='Resposta incorreta 1'>
-        <input type='text' class='incorreta2-pergunta${i}' placeholder='URL da imagem 1'>
+        <input data-test="wrong-answer-input" type='text' class='incorreta1-pergunta${i}' placeholder='Resposta incorreta 1'>
+        <input data-test="wrong-img-input" type='text' class='incorreta2-pergunta${i}' placeholder='URL da imagem 1'>
     </div>
     <div class='incorreta2'>
-        <input type='text' class='incorreta2-pergunta${i}' placeholder='Resposta incorreta 2'>
-        <input type='text' class='incorreta2-pergunta${i}' placeholder='URL da imagem 2'>
+        <input data-test="wrong-answer-input" type='text' class='incorreta2-pergunta${i}' placeholder='Resposta incorreta 2'>
+        <input data-test="wrong-img-input" type='text' class='incorreta2-pergunta${i}' placeholder='URL da imagem 2'>
     </div>
     <div class='incorreta3'>
-        <input type='text' class='incorreta3-pergunta${i}' placeholder='Resposta incorreta 3'>
-        <input type='text' class='incorreta3-pergunta${i}' placeholder='URL da imagem 3'>
+        <input data-test="wrong-answer-input" type='text' class='incorreta3-pergunta${i}' placeholder='Resposta incorreta 3'>
+        <input data-test="wrong-img-input" type='text' class='incorreta3-pergunta${i}' placeholder='URL da imagem 3'>
     </div>
 </div> 
 </div>`;
+console.log(Pergunta)
 }
 
 
@@ -413,4 +423,33 @@ function decidirNiveis() {
 
     criarPerguntas.classList.add('escondido');
     decidirNiveis.classList.remove('escondido');
+    numerodeNiveis();
+
+}
+
+function numerodeNiveis () {
+    const niveis = document.querySelector('.decidirNiveis .outrosNiveis')
+
+    for (let i = 1; i < qntdNiveis; i++) {
+
+        niveis.innerHTML += `<div class="nivelmini" data-test="toggle">
+        <span>nível ${i+1}</span>
+        <img src="imgs/note.png" onclick="abrirnivel(this, ${i +1})">
+    </div>`     
+    }
+}
+function abrirnivel (nivel, i) {
+    Nivel = nivel.parentNode;
+    //const numero = Pergu
+    Nivel.classList.add('nivel')
+    Nivel.classList.remove('nivelmini')
+
+    Nivel.innerHTML = `<div class="informacoes" data-test="level-ctn">
+    <p>nível ${i}</p>
+    <input type="text" data-test="level-input" class="titulo-nivel${i}" placeholder="Título do nível">
+    <input type="text" data-test="level-percent-input" class="%acerto-nivel${i}" placeholder="% de acerto mínima">
+    <input type="text" data-test="level-img-input" class="url-nivel${i}" placeholder="URL da imagem do nível">
+    <input type="textarea" data-test="level-description-input"  class="descricao-nivel${i}" placeholder="Descrição do nível">
+</div>`
+
 }
