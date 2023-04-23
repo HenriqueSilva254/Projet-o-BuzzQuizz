@@ -190,6 +190,12 @@ const qntdNiveis = document.getElementById('qntd-nvl').value
 // adicionar clsse e remover... e pegar valores dos inputs
 
 function criarPerguntas() {
+
+    validarinput();
+    if (mensagem !== '') {
+        return alert(mensagem), mensagem = '';
+    }
+
     const criarQuizz = document.querySelector('.criarQuizz');
     const criarPerguntas = document.querySelector('.criarPerguntas');
 
@@ -342,8 +348,37 @@ function GetValuePerguntas(){
 
 let Pergunta = '';
 let Nivel = ''
+let mensagem = '';
+
+function validarinput() {
+    const titulo = Number(document.querySelector('.titulo').value);
+    const capa = document.querySelector(".imagem-capa").value;
+    const verificador = capa.slice(0, 8)
+    const qntdep = Number(document.querySelector('.qtde-perguntas').value);
+    const qtndel = Number(document.querySelector('.qtde-niveis').value);
+    
+    if(titulo.length < 20 && titulo.length > 65) {
+        mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
+    }
+    if (verificador !== 'https://') {
+        mensagem += "cheque se sua imagem é válida \n"
+    }
+    if (qntdep < 3) {
+        mensagem += "Cheque se a quantidade de perguntas é no minimo 3 \n"
+    }    
+    if (qtndel < 2) {
+        mensagem += "Cheque se a quantidade de níveis é no minimo 2 \n"
+    }
+    
+    
+    // if (mensagem !== '') {
+    //     alert(mensagem)
+    // }
+
+}
 
 function criarQuizzz() {
+
     const index = document.querySelector('.pagina1');
     const criarQuizz = document.querySelector('.criarQuizz');
 
@@ -352,6 +387,9 @@ function criarQuizzz() {
 }
 
 function numerodePerguntas () {
+
+    
+
     const perguntas = document.querySelector('.criarPerguntas .outrasPerguntas')
     const numero = Number(document.querySelector('.qtde-perguntas').value)
     for (let i = 1; i < numero; i++) {
@@ -416,6 +454,7 @@ console.log(Pergunta)
 
 
 function decidirNiveis() {
+
     const criarPerguntas = document.querySelector('.criarPerguntas');
     const decidirNiveis = document.querySelector('.decidirNiveis');
 
@@ -436,6 +475,7 @@ function numerodeNiveis () {
     </div>`     
     }
 }
+
 function abrirnivel (nivel, i) {
     Nivel = nivel.parentNode;
     //const numero = Pergu
