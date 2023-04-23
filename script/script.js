@@ -420,7 +420,7 @@ function criarQuizzz() {
     const index = document.querySelector('.pagina1');
     const criarQuizzzz = document.querySelector('.criarQuizz');
 
-    index.classList.add('escondido');
+    index.classList.add('escondido');   
     criarQuizzzz.classList.remove('escondido');
 }
 
