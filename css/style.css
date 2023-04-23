@@ -23,7 +23,7 @@ body {
     height: auto;
 }
 
-.titulo {
+.titulo3 {
     font-family: Roboto;
     font-size: 20px;
     font-weight: 700;
@@ -114,6 +114,9 @@ body {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+}
+.criarquizz:hover {
+    cursor: pointer;
 }
 
 ul {
@@ -504,7 +507,10 @@ ul {
 }
 
 /*  criar quizz */
-
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+}
 
 .criarQuizz {
     width: 600px;
@@ -517,7 +523,8 @@ ul {
 .decidirNiveis p {
     inline-size: 600px;
     width: 100%;
-    text-align: center;
+    text-align: start;
+    padding-left: 20px;
     margin-top: 130px;
     margin-bottom: 27px;
     background: #FAFAFA;
@@ -529,9 +536,11 @@ ul {
     line-height: 27px;
     color: #000000;
 }
-
+.decidirNiveis p {
+    margin-top: 0;
+}
 .informacoes,
-.pergunta {
+.pergunta, .nivel {
     background: #FFFFFF;
     text-align: center;
     display: flex;
@@ -545,7 +554,7 @@ ul {
     margin: 15px auto;
 }
 
-.perguntamini {
+.perguntamini, .nivelmini {
     padding: 20px;
     margin: 15px 10px;
     background: #FFFFFF;
@@ -586,6 +595,8 @@ ul {
     display: block;
 
 } */
+
+
 
 .informacoes input,
 .pergunta1 input,
@@ -628,7 +639,7 @@ button:hover,
 
 /* criar perguntas */
 
-.criarPerguntas span {
+.criarPerguntas span, .decidirNiveis span {
     inline-size: 600px;
     text-align: start;
     /* margin-top: 130px; */
@@ -642,3 +653,31 @@ button:hover,
     line-height: 27px;
     color: #000000;
 }
+
+.decidirNiveis textarea {
+    font-family: 'Roboto';
+    padding-top: 3px;
+    height: 170px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 564px;
+    padding-left: 20px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1
+}
+
+/* .pergunta2mini, .pergunta3mini {
+    
+
+    height: 74px;
+    width: 600px;
+    padding-left: 20px;
+    border-radius: 5px;
+    border: 1px solid #D1D1D1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    
+} */

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -16,15 +16,16 @@
 </head>
 
 <body>
+    <header>
+        <div class="navbar content">BuzzQuizz</div>
+    </header>
     <div class="pagina1">
-        <header>
-            <div class="navbar content">BuzzQuizz</div>
-        </header>
+        
         <main class="container">
             <div class="content">
                 <div class="inserirQuizz">
                     <div class="nenhumquizz">Você não criou nenhum quizz ainda :(</div>
-                    <div data-test="create-btn" class="criarquizz">Criar Quizz</div>
+                    <div data-test="create-btn" class="criarquizz" onclick="firstButton()">Criar Quizz</div>
                 </div>
             </div>
             <p class="titulo">Todos os Quizzes</p>
@@ -40,66 +41,73 @@
         </div>
         <div class="informacoes">
             
-            <input type="text" class="titulo" placeholder="Título do seu quizz">
-            <input type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz">
-            <input type="text" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz">
-            <input type="text" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
+            <input data-test="title-input" id="title" minlength="20" maxlength="65" type="text" class="titulodoquizz" placeholder="Título do seu quizz" >
+            <input data-test="img-input" id="url-img" type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz" value="https://http.cat/426">
+            <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz">
+            <input data-test="levels-amount-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
         </div>
-        <button onclick="criarPerguntas()">Prosseguir para criar perguntas</button>
+        <button  data-test="go-create-questions" onclick="numerodePerguntas(), secondButton() ">Prosseguir para criar perguntas</button>
+        <!--/*, checkUrl(document.querySelector('.imagem-capa').value)*/-->
     </div>
     <div class="criarPerguntas escondido">
         <div>
             <p class="informacoes">Crie suas perguntas</p>
         </div>
+        <!-- <div data-test="question-ctn" class="pergunta1"> -->
+            <!-- <div class="info1"> -->
         <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
-        <div class="pergunta">
+        <div  data-test="question-ctn" class="pergunta">
             <div class="info">
-                <span>Pergunta 1</span>
-                <input type="text" class="text-pergunta1" placeholder="Texto da pergunta">
-                <input type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
+                <span>Pergunta 1 </span>
+                <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
+                <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
             </div>
             <div class="correta1">
                 <span>Resposta correta</span>
-                <input type="text" class="correta-pergunta1" placeholder="Resposta correta">
-                <input type="text" class="url-certa-pergunta1" placeholder="URL da imagem">
+                <input id="" data-test="correct-answer-input" type="text" class="correta-pergunta1" placeholder="Resposta correta">
+                <input id="" data-test="correct-img-input" type="text" class="url-certa-pergunta1" placeholder="URL da imagem">
             </div>
             <div class="incorretas1">
                 <span class="">Respostas incorretas</span>
                 <div class="incorreta1">
-                    <input type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
-                    <input type="text" class="incorreta2-pergunta1" placeholder="URL da imagem 1">
+                    <input id="" data-test="wrong-answer-input" type="text" class="incorreta1-pergunta1" placeholder="Resposta incorreta 1">
+                    <input id="" data-test="wrong-img-input" type="text" class="url-incorreta1" placeholder="URL da imagem 1">
                 </div>
                 <div class="incorreta2">
-                    <input type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
-                    <input type="text" class="incorreta2-pergunta1" placeholder="URL da imagem 2">
+                    <input id="" data-test="wrong-answer-input" type="text" class="incorreta2-pergunta1" placeholder="Resposta incorreta 2">
+                    <input id="" data-test="wrong-img-input" type="text" class="url-incorreta2" placeholder="URL da imagem 2">
                 </div>
                 <div class="incorreta3">
-                    <input type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
-                    <input type="text" class="incorreta3-pergunta1" placeholder="URL da imagem 3">
+                    <input id="" data-test="wrong-answer-input" type="text" class="incorreta3-pergunta1" placeholder="Resposta incorreta 3">
+                    <input id="" data-test="wrong-img-input" type="text" class="url-incorreta3" placeholder="URL da imagem 3">
                 </div>
             </div>
         </div> 
         <div class="criarPerguntas outrasPerguntas">
-
-        </div>
-        <button onclick="decidirNiveis()">Prosseguir para criar níveis</button>
+        </div>    
+        <button onclick="terceiroButton (), decidirNiveis()" data-test="go-create-levels">Prosseguir para criar níveis</button>
+        <!-- decidirNiveis() GetValuePerguntas() -->
     </div>
+    <!-- </div> -->
     <div class="decidirNiveis escondido">
         <div>
-            <p class="informacoes">Agora, decida os níveis</p>
+            <span class="informacoes">Agora, decida os níveis</span>
         </div>
         <div class="informacoes">
-            <p>nivel 1</p>
-            <input type="text" class="titulo-nivel1" placeholder="Título do nível">
-            <input type="text" class="imagem-capa-nivel1" placeholder="% de acerto mínima">
-            <input type="text" class="qtde-perguntas-nivel1" placeholder="URL da imagem do nível">
-            <input type="text" class="qtde-niveis" placeholder="Descrição do nível">
-        </div>
-        <button onclick="criar()">Finalizar Quizz</button>
+                <p>nível 1</p>
+                <input type="text" data-test="level-input" class="titulo-nivel1" placeholder="Título do nível">
+                <input type="text" data-test="level-percent-input" class="acerto-nivel1" placeholder="% de acerto mínima">
+                <input type="text" data-test="level-img-input" class="url-nivel1" placeholder="URL da imagem do nível">
+                <textarea type="text" data-test="level-description-input"  class="descricao-nivel1" placeholder="Descrição do nível"></textarea>
+            </div>
+        
+        <div class="decidirNiveis outrosNiveis"></div>
+        <button onclick="Niveis ()" data-test="finish">Finalizar Quizz</button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="./script/script.js"></script>
+
 </body>
 
 </html>
