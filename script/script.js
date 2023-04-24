@@ -289,11 +289,11 @@ function firstButton() {
 
 function secondButton() {
 
-    validarinput();
+/*  validarinput();
     if (mensagem !== '') {
         return alert(mensagem), mensagem = '';
     }
-
+*/
     // Adicionar e remover ESCONDIDO
 
     const mudarClasse = document.querySelector('.criarQuizz');
@@ -418,7 +418,11 @@ function validarinput() {
     const qntdep = Number(document.querySelector('.qtde-perguntas').value);
     const qtndel = Number(document.querySelector('.qtde-niveis').value);
     
-    if(titulo.length < 20 || titulo.length > 65) {
+    
+    if(titulo.length > 65) {
+        mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
+    }
+    if(titulo.length < 20) {
         mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
     }
     if (verificador !== 'https://') {
@@ -432,10 +436,7 @@ function validarinput() {
     }
     
     
-    // if (mensagem !== '') {
-    //     alert(mensagem)
-    // }
-
+    
 }
 
 function criarQuizzz() {
@@ -459,49 +460,57 @@ function numerodePerguntas () {
         <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, ${i + 1})">
     </div>`     
     }
+    
     }
 
+function fecharPergunta(){
 
+    const perguntass = document.querySelector('.pergunta');
+    
+    perguntass.classList.toggle('container_fechadas')
+   
+    console.log(perguntass)
+
+}
 
 
 
 function abrirPergunta(pergunta, i) {
-    // const abrirPergunta2 = document.querySelector('.pergunta2mini')
-    // console.log(i);
-    //console.log(pergunta);
+    console.log(pergunta)
     Pergunta = pergunta.parentNode;
-    //console.log(pergunta.parentNode.innerHTML);
-    //const numero = Pergu
     Pergunta.classList.add('pergunta')
     Pergunta.classList.remove('perguntamini')
 
     Pergunta.innerHTML = `<div class='pergunta' data-test="question-ctn" >
-<div data-test="question-ctn" class='info'>
-    <span>Pergunta ${i}</span> 
-    <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
-    <input data-test="question-color-input" type='text' class='cor-pergunta${i}' placeholder='Cor de fundo da pergunta'>
-</div>
-<div class='correta'>
-    <span>Resposta correta</span>
-    <input data-test="correct-answer-input" type='text' class='correta-pergunta${i}' placeholder='Resposta correta'>
-    <input data-test="correct-img-input" type='text' class='url-certa-pergunta${i}' placeholder='URL da imagem'>
-</div>
-<div class='incorretas1'>
-    <span class=''>Respostas incorretas</span>
-    <div class='incorreta1'>
-        <input data-test="wrong-answer-input" type='text' class='incorreta1-pergunta${i}' placeholder='Resposta incorreta 1'>
-        <input data-test="wrong-img-input" type='text' class='url-incorreta1${i}' placeholder='URL da imagem 1'>
-    </div>
-    <div class='incorreta2'>
-        <input data-test="wrong-answer-input" type='text' class='incorreta2-pergunta${i}' placeholder='Resposta incorreta 2'>
-        <input data-test="wrong-img-input" type='text' class='url-incorreta2${i}' placeholder='URL da imagem 2'>
-    </div>
-    <div class='incorreta3'>
-        <input data-test="wrong-answer-input" type='text' class='incorreta3-pergunta${i}' placeholder='Resposta incorreta 3'>
-        <input data-test="wrong-img-input" type='text' class='url-incorreta3${i}' placeholder='URL da imagem 3'>
-    </div>
-</div> 
-</div>`;
+                            <div data-test="question-ctn" class='info'>
+                                <div class="container_perguntas"> 
+                                    <span>Pergunta ${i}</span> 
+                                    <img src="imgs/note.png" data-test="toggle"  onclick="fecharPergunta(this, ${i})">
+                                </div>
+                                <input data-test="question-input" type='text' class='text-pergunta${i}' placeholder='Texto da pergunta'>
+                                <input data-test="question-color-input" type='text' class='cor-pergunta${i}' placeholder='Cor de fundo da pergunta'>
+                            </div>
+                                <div class='correta'>
+                                    <span>Resposta correta</span>
+                                    <input data-test="correct-answer-input" type='text' class='correta-pergunta${i}' placeholder='Resposta correta'>
+                                    <input data-test="correct-img-input" type='text' class='url-certa-pergunta${i}' placeholder='URL da imagem'>
+                                </div>
+                                <div class='incorretas1'>
+                                    <span class=''>Respostas incorretas</span>
+                                    <div class='incorreta1'>
+                                        <input data-test="wrong-answer-input" type='text' class='incorreta1-pergunta${i}' placeholder='Resposta incorreta 1'>
+                                        <input data-test="wrong-img-input" type='text' class='url-incorreta1${i}' placeholder='URL da imagem 1'>
+                                    </div>
+                                    <div class='incorreta2'>
+                                        <input data-test="wrong-answer-input" type='text' class='incorreta2-pergunta${i}' placeholder='Resposta incorreta 2'>
+                                        <input data-test="wrong-img-input" type='text' class='url-incorreta2${i}' placeholder='URL da imagem 2'>
+                                    </div>
+                                    <div class='incorreta3'>
+                                        <input data-test="wrong-answer-input" type='text' class='incorreta3-pergunta${i}' placeholder='Resposta incorreta 3'>
+                                        <input data-test="wrong-img-input" type='text' class='url-incorreta3${i}' placeholder='URL da imagem 3'>
+                                    </div>
+                                </div> 
+                            </div>`;
 console.log(document.querySelector(`.url-certa${i}`))
 }
 

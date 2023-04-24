@@ -574,13 +574,41 @@ ul {
     /* align-items: ; */
     justify-content: space-between;
 }
+.container_perguntas{
+
+    display: flex;
+    padding: 15px;
+    align-items: center;
+  
+    width: 580px;
+    padding-left: 20px;
+    border-radius: 5px;
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: space-between;
+}
+.container_fechadas {
+   
+
+    background: #FFFFFF;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    align-items: center;
+    width: 600px;
+    height: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    margin: 15px auto;
+}
 
 .pergunta img {
     display: flex;
     justify-content: end;
 }
 
-/* .pergunta2mini {
+/* 
+.pergunta2mini {
     height: 825px;
     background: #FFFFFF;
     text-align: center;
@@ -666,6 +694,43 @@ button:hover,
     border: 1px solid #D1D1D1
 }
 
+@media (max-width: 376px) {
+     .Quizz {
+        width: 100%;
+      }
+     .navbar,.criarQuizz,.informacoes, .inserirQuizz, .pergunta, .container_perguntas, span, .perguntamini, .decidirNiveis textarea, .decidirNiveis, .decidirNiveis textarea {
+        width: 375px;
+      }
+      .criarQuizz p, .criarPerguntas p, .decidirNiveis p {
+        margin-left: 0;
+        margin-right: 0;
+        width: 375px;
+        text-align: start;
+        padding-left: 0px;
+    }
+    .informacoes input, .pergunta1 input, .pergunta input, .perguntamini, .nivelmini, .perguntamini,  .nivel {
+    width: 341px;
+    }
+    .criarQuizz button{ 
+    width: 324px;
+    height: 54px;
+    }
+    .criarPerguntas span, .decidirNiveis span {
+      margin: 0;
+    }
+    
+    .decidirNiveis span{
+        margin-top: 70px;
+        width: 340px;
+    }
+    .criarQuizz button, .criarPerguntas button, .decidirNiveis button{
+        margin-left: 20px;
+    }
+
+
+
+
+}
 /* .pergunta2mini, .pergunta3mini {
     
 
