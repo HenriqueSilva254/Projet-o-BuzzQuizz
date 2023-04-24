@@ -289,11 +289,11 @@ function firstButton() {
 
 function secondButton() {
 
-/*  validarinput();
+    validarinput();
     if (mensagem !== '') {
         return alert(mensagem), mensagem = '';
     }
-*/
+
     // Adicionar e remover ESCONDIDO
 
     const mudarClasse = document.querySelector('.criarQuizz');
