@@ -49,7 +49,7 @@
         </div>
         <div class="informacoes">
             
-            <input data-test="title-input" id="title" minlength="20" maxlength="65" type="text" class="titulodoquizz" placeholder="Título do seu quizz" >
+            <input data-test="title-input" id="title" type="text" class="titulodoquizz" placeholder="Título do seu quizz" >
             <input data-test="img-input" id="url-img" type="text" class="imagem-capa" placeholder="URL da imagem do seu quizz" value="https://http.cat/426">
             <input data-test="questions-amount-input" id="qntd-perguntas" type="number" class="qtde-perguntas" placeholder="Quantidade de perguntas do quizz">
             <input data-test="levels-amount-input" id="qntd-nvl" type="number" class="qtde-niveis" placeholder="Quantidade de níveis do quizz">
@@ -66,9 +66,9 @@
         <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
         <div  data-test="question-ctn" class="pergunta">
             <div class="info">
-                <div class="perguntamini" data-test="question-ctn">
-                    <span>Pergunta 1</span>
-                    <img src="imgs/note.png" data-test="toggle" onclick="abrirPergunta(this, 1)">
+                <div class="container_perguntas"> 
+                    <span>Pergunta 1</span> 
+                    <img src="imgs/note.png" data-test="toggle" onclick="fecharPergunta()">
                 </div>
                 <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
                 <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
