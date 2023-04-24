@@ -168,7 +168,6 @@ function renderizarPerguntas() {
               </div>
               <p data-test="answer-text" class="respostaemcima">${respostas[k].text}</p>
               <p data-test="answer-text" class="resposta ${respostas[k].isCorrectAnswer} display">${respostas[k].text}</p>
-              <p class="falseoutrue">${respostas[k].isCorrectAnswer}</p>
             </div>
           `;
         }
@@ -242,8 +241,29 @@ function renderizarQuizzes() {
         elementoul.innerHTML += template;
     }
 
-
 }
+function renderizarMeusQuizzes() {
+    location.reload();
+    const elementoMeusQuizzes = document.querySelector('.inserirQuizz');
+    elementoMeusQuizzes.classList.add('display');
+    const elementoMeusQuizzes2 = document.querySelector('.content');
+    elementoMeusQuizzes2.innerHTML = '';
+
+    let layout = ''; // inicializa a variável layout com uma string vazia
+    layout += `
+        <p class="titulo">Meus Quizzes</p>
+    `;
+
+        layout += `
+            <li data-test="others-quiz" class="Quizz" data-id="${quiZZZZZCriar.id}" onclick="pegarId(event)">
+                <img class ="Quizz-img" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0)), url(${quiZZZZZCriar.image})"/>
+                <p class = "titulo1">${quiZZZZZCriar.title}</p>
+            </li>
+        `;
+
+    elementoMeusQuizzes.innerHTML = layout; // move a linha para fora do loop for
+}
+
 
 function erroBuscarQuizzes(erro) {
     console.log(erro);
@@ -252,7 +272,7 @@ function erroBuscarQuizzes(erro) {
 function sucessoBuscarQuizzes(resposta) {
     quizzes = resposta.data;
     console.log(quizzes);
-    renderizarQuizzes()
+    renderizarQuizzes();
 }
 
 function buscarTodosOsQuizzes() {
@@ -289,10 +309,10 @@ function firstButton() {
 
 function secondButton() {
 
-   /* validarinput();
+   validarinput();
     if (mensagem !== '') {
         return alert(mensagem), mensagem = '';
-    }*/
+    }
 
     // Adicionar e remover ESCONDIDO
 
@@ -392,6 +412,7 @@ function secondButton() {
       console.error(error);
     });
   
+    renderizarMeusQuizzes()
   }
 
   
@@ -418,11 +439,14 @@ function validarinput() {
     const qntdep = Number(document.querySelector('.qtde-perguntas').value);
     const qtndel = Number(document.querySelector('.qtde-niveis').value);
     
-    if(titulo.length < 20 || titulo.length > 65) {
-        mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
+    if(titulo.length < 20) {
+        mensagem += "Cheque se seu título possui entre 20 e 65 caracteres \n"
+    }
+    if(titulo.length > 65) {
+        mensagem += "Cheque se seu título possui entre 20 e 65 caracteres \n"
     }
     if (verificador !== 'https://') {
-        mensagem += "cheque se sua imagem é válida \n"
+        mensagem += "Cheque se sua imagem é válida \n"
     }
     if (qntdep < 3) {
         mensagem += "Cheque se a quantidade de perguntas é no minimo 3 \n"
@@ -430,12 +454,6 @@ function validarinput() {
     if (qtndel < 2) {
         mensagem += "Cheque se a quantidade de níveis é no minimo 2 \n"
     }
-    
-    
-    // if (mensagem !== '') {
-    //     alert(mensagem)
-    // }
-
 }
 
 function criarQuizzz() {
