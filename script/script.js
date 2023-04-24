@@ -331,7 +331,9 @@ function secondButton() {
         const wrongAnswer2Image = document.querySelector(`input.url-incorreta${i}`).value;
         const wrongAnswer3 = document.querySelector(`input.incorreta3-pergunta${i}`).value;
         const wrongAnswer3Image = document.querySelector(`input.url-incorreta${i}`).value;
-  
+        const inputsTextos = [questionTitle, correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3]
+        const inputsUrl =[correctAnswerImage, wrongAnswer1Image, wrongAnswer2Image, wrongAnswer3Image]
+       
       const question = {
         title: questionTitle,
         color: questionColor,
@@ -357,8 +359,13 @@ function secondButton() {
             isCorrectAnswer: false
           }
         ]
+        
+        
       };
-  
+      console.log("ta rodando")
+      
+   
+     
       quiZZZZZCriar.questions.push(question);
       console.log(quiZZZZZCriar)
     }
@@ -401,16 +408,12 @@ function secondButton() {
 
 
 
-
-
-
-
-
-
 let Pergunta = '';
 let Nivel = ''
 let mensagem = '';
 
+
+       
 function validarinput() {
     const titulo = document.querySelector('.titulodoquizz').value;
     const capa = document.querySelector(".imagem-capa").value;
