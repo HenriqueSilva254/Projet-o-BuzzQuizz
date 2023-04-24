@@ -479,21 +479,12 @@ function validarinput() {
     const verificador = capa.slice(0, 8)
     const qntdep = Number(document.querySelector('.qtde-perguntas').value);
     const qtndel = Number(document.querySelector('.qtde-niveis').value);
-<<<<<<< HEAD
     console.log(titulo, capa, verificador, qntdep, qtndel);
 
     if(titulo.length <= 20) {
         mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
     }
     if(titulo.length >= 65) {
-=======
-    
-    
-    if(titulo.length > 65) {
-        mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
-    }
-    if(titulo.length < 20) {
->>>>>>> 7ed0323180a8d6d51603369a26108cd83d7acd01
         mensagem += "cheque se seu título possui entre 20 e 65 caracteres \n"
     }
     if (verificador !== 'https://') {
@@ -507,14 +498,7 @@ function validarinput() {
     }
     
     
-<<<<<<< HEAD
-    //  if (mensagem !== '') {
-    //      alert(mensagem)
-    //  }
-
-=======
     
->>>>>>> 7ed0323180a8d6d51603369a26108cd83d7acd01
 }
 
 function criarQuizzz() {
@@ -549,10 +533,7 @@ function fecharPergunta(){
    
     console.log(perguntass)
 
-<<<<<<< HEAD
-=======
 }
->>>>>>> 7ed0323180a8d6d51603369a26108cd83d7acd01
 
 
 
