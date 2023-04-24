@@ -22,10 +22,18 @@
     <div class="pagina1">
         
         <main class="container">
-            <div class="content">
+            <div class="content semquizz">
                 <div class="inserirQuizz">
                     <div class="nenhumquizz">Você não criou nenhum quizz ainda :(</div>
                     <div data-test="create-btn" class="criarquizz" onclick="firstButton()">Criar Quizz</div>
+                </div>
+            </div>
+            <div>
+                <p class="titulo">Seus Quizzes </p> <ion-icon onclick="firstButton()" name="add-circle-outline"></ion-icon>
+                <div class=" quizzes-usuario escondido">
+                    <ul class="quizzes-do-usuario">
+
+                    </ul>
                 </div>
             </div>
             <p class="titulo">Todos os Quizzes</p>
@@ -58,7 +66,10 @@
         <!-- <div class="pergunta1mini">Pergunta 1 </div> -->
         <div  data-test="question-ctn" class="pergunta">
             <div class="info">
-                <span>Pergunta 1 </span>
+                <div class="container_perguntas"> 
+                    <span>Pergunta 1</span> 
+                    <img src="imgs/note.png" data-test="toggle" onclick="fecharPergunta()">
+                </div>
                 <input id="txtPergunta" data-test="question-input" type="text" class="text-pergunta1" placeholder="Texto da pergunta">
                 <input id="corPergunta" data-test="question-color-input" type="text" class="cor-pergunta1" placeholder="Cor de fundo da pergunta">
             </div>
@@ -104,6 +115,11 @@
         <div class="decidirNiveis outrosNiveis"></div>
         <button onclick="Niveis ()" data-test="finish">Finalizar Quizz</button>
     </div>
+    <div class="quizz-finalizado escondido">
+        <p>Seu quizz está pronto!</p>
+
+    </div>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="./script/script.js"></script>
